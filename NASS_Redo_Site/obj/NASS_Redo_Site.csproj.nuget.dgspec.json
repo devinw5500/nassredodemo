@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\Projects\\NASS_Redo_Site\\NASS_Redo_Site\\NASS_Redo_Site.csproj": {}
+    "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\NASS_Redo_Site.csproj": {}
   },
   "projects": {
-    "D:\\Work\\Projects\\NASS_Redo_Site\\NASS_Redo_Site\\NASS_Redo_Site.csproj": {
+    "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\NASS_Redo_Site.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\Projects\\NASS_Redo_Site\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
+        "projectUniqueName": "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
         "projectName": "NASS_Redo_Site",
-        "projectPath": "D:\\Work\\Projects\\NASS_Redo_Site\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
+        "projectPath": "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
         "packagesPath": "C:\\Users\\djluk\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\Projects\\NASS_Redo_Site\\NASS_Redo_Site\\obj\\",
+        "outputPath": "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\djluk\\AppData\\Roaming\\NuGet\\NuGet.Config",
