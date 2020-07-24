@@ -1,6 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Create Person";
 }
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+
+    $('StateSelect').on('change', function () {
+        alert("select has changed");
+        $.ajax({
+            type: "POST",
+            url: '<%= Url.Action("CreatePerson", "Home") %>',
+            success: function (data) {
+                alert("ok");
+            }
+        });
+    });
+
+</script>
 
 <h1>Create</h1>
 
@@ -68,45 +83,29 @@
         </div>
         <div class="form-row">
             <div class="col">
-                <select class="form-control flex-column" id="StateSelect" name="StateSelect" value="@ViewData["StateSelect"]">
+                <select class="form-control flex-column" id="StateSelect" name="StateSelect" value="@ViewData["StateSelect"]" asp-items="ViewBag.StateName">
                     <option value="">-State-</option>
                     <option value="TestState">TestState</option>
-                    <option value="State2">State2</option>
-                    <option value="State3">State3</option>
-                    <option value="State4">State4</option>
-                    <option value="State5">State5</option>
                 </select>
             </div>
             <div class="col">
-                <select class="form-control flex-column" id="ZipSelect" name="ZipSelect" value="@ViewData["ZipSelect"]">
+                <select class="form-control flex-column" id="ZipSelect" name="ZipSelect" value="@ViewData["ZipSelect"]" asp-items="ViewBag.ZipName">
                     <option value="">-ZIP-</option>
                     <option value="TestZip">TestZip</option>
-                    <option value="Zip2">22222</option>
-                    <option value="Zip3">33333</option>
-                    <option value="Zip4">44444</option>
-                    <option value="Zip5">55555</option>
                 </select>
             </div>
         </div>
         <div class="form-row">
             <div class="col">
-                <select class="form-control flex-column" id="CitySelect" name="CitySelect" value="@ViewData["CitySelect"]">
+                <select class="form-control flex-column" id="CitySelect" name="CitySelect" value="@ViewData["CitySelect"]" asp-items="ViewBag.CityName">
                     <option value="">-City-</option>
                     <option value="TestCity">TestCity</option>
-                    <option value="City2">City2</option>
-                    <option value="City3">City3</option>
-                    <option value="City4">City4</option>
-                    <option value="City5">City5</option>
                 </select>
             </div>
             <div class="col">
-                <select class="form-control flex-column" id="CountySelect" name="CountySelect" value="@ViewData["CountySelect"]">
+                <select class="form-control flex-column" id="CountySelect" name="CountySelect" value="@ViewData["CountySelect"]" asp-items="ViewBag.CountyName">
                     <option value="">-County-</option>
                     <option value="TestCounty">TestCounty</option>
-                    <option value="County2">County2</option>
-                    <option value="County3">County3</option>
-                    <option value="County4">County4</option>
-                    <option value="County5">County5</option>
                 </select>
             </div>
         </div>

@@ -4,19 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using NASS_Redo_Site.Models;
 
 namespace NASS_Redo_Site.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly NASS_RedoContext _context;
+        public HomeController(NASS_RedoContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -30,6 +29,23 @@ namespace NASS_Redo_Site.Controllers
         }
         public IActionResult CreatePerson()
         {
+            ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreatePerson(string StateSelect)
+        {
+            ViewData["StateSelect"] = StateSelect;
+            var ctx = new NASS_RedoContext();
+
+            IEnumerable<SelectListItem> cities = (IEnumerable<SelectListItem>)ctx.City.Where(n => n.State.Equals(StateSelect));
+            IEnumerable<SelectListItem> counties = (IEnumerable<SelectListItem>)ctx.County.Where(n => n.State.Equals(StateSelect));
+            IEnumerable<SelectListItem> zipz = (IEnumerable<SelectListItem>)ctx.Zip.Where(n => n.State.Equals(StateSelect));
+
+            ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
+            ViewData["CityName"] = new SelectList(cities, "Name", "Name");
+            ViewData["CountyName"] = new SelectList(counties, "Name", "Name");
+            ViewData["ZipName"] = new SelectList(zipz, "Zip1", "Zip1");
             return View();
         }
         //Posting method for create person, takes all variables for basic record creating
