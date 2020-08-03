@@ -10,6 +10,7 @@ using NASS_Redo_Site.Models;
 
 namespace NASS_Redo_Site.Controllers
 {
+    //TODO: add todos later pls
     public class HomeController : Controller
     {
         private readonly NASS_RedoContext _context;
@@ -27,25 +28,22 @@ namespace NASS_Redo_Site.Controllers
         {
             return View();
         }
-        public IActionResult CreatePerson()
+        public IActionResult CreatePersonState()
         {
-            ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
+            ViewData["StateSelect"] = new SelectList(_context.State, "StateId", "Name");
             return View();
         }
-        [HttpPost]
         public IActionResult CreatePerson(string StateSelect)
         {
             ViewData["StateSelect"] = StateSelect;
             var ctx = new NASS_RedoContext();
 
-            IEnumerable<SelectListItem> cities = (IEnumerable<SelectListItem>)ctx.City.Where(n => n.State.Equals(StateSelect));
-            IEnumerable<SelectListItem> counties = (IEnumerable<SelectListItem>)ctx.County.Where(n => n.State.Equals(StateSelect));
-            IEnumerable<SelectListItem> zipz = (IEnumerable<SelectListItem>)ctx.Zip.Where(n => n.State.Equals(StateSelect));
+            Debug.WriteLine("State : " + StateSelect);
 
             ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
-            ViewData["CityName"] = new SelectList(cities, "Name", "Name");
-            ViewData["CountyName"] = new SelectList(counties, "Name", "Name");
-            ViewData["ZipName"] = new SelectList(zipz, "Zip1", "Zip1");
+            ViewData["CityName"] = new SelectList(ctx.City.Where(n => n.State.Equals(StateSelect)), "Name", "Name");
+            ViewData["CountyName"] = new SelectList(ctx.County.Where(n => n.State.Equals(StateSelect)), "Name", "Name");
+            ViewData["ZipName"] = new SelectList(ctx.Zip.Where(n => n.State.Equals(StateSelect)), "Zip1", "Zip1");
             return View();
         }
         //Posting method for create person, takes all variables for basic record creating

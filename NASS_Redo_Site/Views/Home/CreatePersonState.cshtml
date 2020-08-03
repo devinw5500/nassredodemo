@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Create Person";
+}
+
+
+<h1>Create</h1>
+
+<h4>Person</h4>
+<hr />
+<div class="container-fluid">
+    <form method="get" asp-action="CreatePerson">
+        <div class="form-row">
+            <h4 class="text-info">Please Select your State</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <select class="form-control flex-column" id="StateSelect" name="StateSelect" value="@ViewData["StateSelect"]" asp-items="ViewBag.StateSelect">
+                    <option value="">-State-</option>
+                    <option value="54">TestState</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <a class="btn-primary" method="get" asp-action="CreatePerson">Enter</a>
+        </div>
+    </form>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back</a>
+</div>
+

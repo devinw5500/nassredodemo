@@ -481,3 +481,4 @@ D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\V
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Details.cshtml.g.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Edit.cshtml.g.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\CreatePersonState.cshtml.g.cs
