@@ -8,7 +8,7 @@
 <h4>Person</h4>
 <hr />
 <div class="container-fluid">
-    <form method="get" asp-action="CreatePerson">
+    <form method="post" asp-action="CreatePersonState">
         <div class="form-row">
             <h4 class="text-info">Please Select your State</h4>
         </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group">
-            <a class="btn-primary" method="get" asp-action="CreatePerson">Enter</a>
+            <input type="submit" value="CreatePersonState" class="btn btn-primary" />
         </div>
     </form>
 </div>

@@ -371,9 +371,6 @@ D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\bin\Debug\netcoreapp3.1\runtime
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.csprojAssemblyReference.cache
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.AssemblyInfoInputs.cache
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.AssemblyInfo.cs
-D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.csproj.CoreCompileInputs.cache
-D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cs
-D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cache
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.RazorAssemblyInfo.cache
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.RazorAssemblyInfo.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.TagHelpers.input.cache
@@ -482,3 +479,7 @@ D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\V
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Edit.cshtml.g.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\CreatePersonState.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\CreateUser.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.csproj.CoreCompileInputs.cache
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cache
