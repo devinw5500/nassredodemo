@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using NASS_Redo_Site.Models;
+using System.Web.WebPages;
 
 namespace NASS_Redo_Site.Controllers
 {
@@ -50,18 +51,13 @@ namespace NASS_Redo_Site.Controllers
             ViewData["StateSelect"] = new SelectList(_context.State, "StateId", "Name");
             return RedirectToAction("CreatePerson", "Home", new { StateSelect });
         }
-        public IActionResult CreatePerson(string StateSelect)
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreatePerson()
         {
             var ctx = new NASS_RedoContext();
 
-            int state = int.Parse(StateSelect);
-
-            Debug.WriteLine("State (createperson) : " + state);
 
             ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
-            ViewData["CityName"] = new SelectList(_context.City.Where(n => n.State.Equals(state)), "Name", "Name");
-            ViewData["CountyName"] = new SelectList(_context.County.Where(n => n.State.Equals(state)), "Name", "Name");
-            ViewData["ZipName"] = new SelectList(_context.Zip.Where(n => n.State.Equals(state)), "Zip1", "Zip1");
             return View();
         }
         //Posting method for create person, takes all variables for basic record creating
@@ -72,6 +68,7 @@ namespace NASS_Redo_Site.Controllers
             string ZipSelect, string CitySelect, string CountySelect,
             string ParcelText)
         {
+            
             var ctx = new NASS_RedoContext();
             ViewData["FNameText"] = FNameText;
             ViewData["MIText"] = MIText;
@@ -252,7 +249,7 @@ namespace NASS_Redo_Site.Controllers
             ctx.Database.ExecuteSqlRaw(newperson);
             ctx.Database.ExecuteSqlRaw(newpersoncontact);
 
-            if (!AddrLine2Text.Equals(null))
+            if (!AddrLine2Text.IsEmpty())
             {
                 string newaddressline2;
 
@@ -287,13 +284,14 @@ namespace NASS_Redo_Site.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateUserAsync(string Email, string Password,
+        public async Task<IActionResult> CreateUserAsync(string Email, string Password, bool ClientCheck,
             string FNameText, string MIText, string LNameText, string DOBText,
             string ContactTypeSelect, bool PrimaryCheck, string ContactText,
             string AddrLine1Text, string AddrLine2Text, string StateSelect,
             string ZipSelect, string CitySelect, string CountySelect,
             string ParcelText)
         {
+            
             var ctx = new NASS_RedoContext();
             ViewData["Email"] = Email;
             ViewData["Password"] = Password;
@@ -481,26 +479,55 @@ namespace NASS_Redo_Site.Controllers
                             "\n,@CountyName" +
                             "\n,@ZipNum";
 
-                //TODO: test newuser insert (make sure test email isnt in aspnetusers table already)
                 string newuser;
 
                 newuser = "\nDECLARE @RC int" +
                             "\nDECLARE @persid int" +
-                            "\nSELECT @persid = [Person].[PersonID]" +
-                            "\nFROM [Person]" +
-                            "\nWHERE [Person].[UniqueUserID] = \'" + LNameText + FNameText + MIText + "\'" +
+                            "\nSELECT @persid = [People].[Person].[PersonID]" +
+                            "\nFROM [People].[Person]" +
+                            "\nWHERE [People].[Person].[UniqueUserID] = \'" + LNameText + FNameText + MIText + "\'" +
                             "\nINSERT INTO [People].[User]" +
                             "\n([PersonID]" +
                             "\n,[ASPNETUserID])" +
                             "\nVALUES" +
-                            "\n(" + "" +
-                            "\n," + user.Id + ")";
+                            "\n(" + "@persid" +
+                            "\n,\'" + user.Id + "\')";
+
+                string newcliemp;
+
+                if (ClientCheck)
+                {
+                    newcliemp = "\nDECLARE @RC int" +
+                            "\nDECLARE @usersid int" +
+                            "\nSELECT @userid = [People].[User].[UserID]" +
+                            "\nFROM [People].[User]" +
+                            "\nWHERE [People].[User].[ASPNETUserID] = \'" + user.Id + "\'" +
+                            "\nINSERT INTO [People].[Client]" +
+                            "\n([UserID])" +
+                            "\nVALUES" +
+                            "\n(@userid)";
+                }
+                else
+                {
+                    newcliemp = "\nDECLARE @RC int" +
+                            "\nDECLARE @usersid int" +
+                            "\nSELECT @userid = [People].[User].[UserID]" +
+                            "\nFROM [People].[User]" +
+                            "\nWHERE [People].[User].[ASPNETUserID] = \'" + user.Id + "\'" +
+                            "\nINSERT INTO [People].[Employee]" +
+                            "\n([UserID])" +
+                            "\nVALUES" +
+                            "\n(@userid)";
+                }
+                
 
                 Debug.WriteLine("\nNewPerson: " + newperson + "\n");
                 Debug.WriteLine("\nNewPersonContact: " + newpersoncontact + "\n");
                 Debug.WriteLine("\nNewAddress: " + newaddress + "\n");
                 Debug.WriteLine("\nNewAddressLine: " + newaddressline + "\n");
                 Debug.WriteLine("\nNewUser: " + newuser + "\n");
+                Debug.WriteLine("\nNewClient/Employee: " + newcliemp + "\n");
+
 
                 ctx.Database.ExecuteSqlRaw(newaddress);
                 ctx.Database.ExecuteSqlRaw(newaddressline);
@@ -508,7 +535,7 @@ namespace NASS_Redo_Site.Controllers
                 ctx.Database.ExecuteSqlRaw(newpersoncontact);
                 ctx.Database.ExecuteSqlRaw(newuser);
 
-                if (!AddrLine2Text.Equals(null))
+                if (!AddrLine2Text.IsEmpty())
                 {
                     string newaddressline2;
 
