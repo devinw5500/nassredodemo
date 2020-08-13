@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Create Person";
+    ViewData["Title"] = "PlaceOrder";
 }
 
 
@@ -8,7 +8,7 @@
 <h4>Order</h4>
 <hr />
 <div class="container-fluid">
-    <form method="post" asp-action="CreatePerson">
+    <form method="post" asp-action="">
         <div class="form-row">
             <h4 class="text-info">Personal Information</h4>
         </div>
@@ -26,34 +26,6 @@
         <div class="form-row">
             <div class="col-4">
                 <input type="date" class="form-control" id="DOBText" name="DOBText" value="@ViewData["DOBText"]" />
-            </div>
-        </div>
-        <div class="form-row">
-            <h4 class="text-info">Contact Information</h4>
-        </div>
-        <div class="form-row">
-            <p>You can add more later, just do your primary on for now!</p>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <select class="form-control" id="ContactTypeSelect" name="ContactTypeSelect" value="@ViewData["ContactTypeSelect"]">
-                    <option value="Phone">Phone</option>
-                    <option value="Email">Email</option>
-                    <option value="Fax">Fax</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-2">
-                <input class="form-check-input" style="margin-left: 0rem;" type="checkbox" id="PrimaryCheck" name="PrimaryCheck" value="true" checked="@ViewData["PrimaryCheck"]">
-                <label class="form-check-label" style="margin-left: 1.25rem;" for="subcheck" id="sublbl">
-                    Primary
-                </label>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-4">
-                <input type="text" class="form-control" id="ContactText" name="ContactText" value="@ViewData["ContactText"]" placeholder="Contact" />
             </div>
         </div>
         <div class="form-row">
@@ -99,6 +71,23 @@
             <div class="col">
                 <input type="text" class="form-control" id="ParcelText" name="ParcelText" value="@ViewData["ParcelText"]" placeholder="Parcel ID (If Applicable)" />
             </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Order Details</h4>
+        </div>
+        <div class="form-row">
+            <label for="ProductSelect">Select Product</label>
+            <select class="form-control flex-column" id="ProductSelect" name="ProductSelect" value="@ViewData["ProductSelect"]" asp-items="ViewBag.ProductName">
+                <option value="">-Product-</option>
+                <option value="TestProduct">TestProduct</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="ProductSelect">Select Workflow</label>
+            <select class="form-control flex-column" id="ProductSelect" name="ProductSelect" value="@ViewData["ProductSelect"]" asp-items="ViewBag.ProductName">
+                <option value="">-Product-</option>
+                <option value="TestProduct">TestProduct</option>
+            </select>
         </div>
         <div class="col"></div>
         <div class="form-group">

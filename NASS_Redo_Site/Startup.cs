@@ -35,7 +35,7 @@ namespace NASS_Redo_Site
                 options.UseSqlServer(conn));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddIdentityCore<IdentityUser>(x => { x.Password.RequiredLength = 6;
+            services.AddIdentityCore<IdentityUser>(x => { x.Password.RequiredLength = 1;
                 x.Password.RequiredUniqueChars = 0; x.Password.RequireDigit = false;
                 x.Password.RequireLowercase = false; x.Password.RequireUppercase = false;
                 x.Password.RequireNonAlphanumeric = false; });

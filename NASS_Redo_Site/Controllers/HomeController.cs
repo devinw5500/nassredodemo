@@ -563,9 +563,21 @@ namespace NASS_Redo_Site.Controllers
             //TODO: display neat error if it is a repeat email
             if (!result.Succeeded)
             {
-                Debug.WriteLine("it didnt work bro fuck hahahahahah " + result.Errors.ToString());
+                Debug.WriteLine("it didnt work bro fuck hahahahahah wee woo wee hahaha");
+                Debug.WriteLine("Ignore him, he just finished dropping 3 gallons of LSD. \nThe result did not succeed, ERRORS:" + result.Errors.ToString());
                 return View();
             }
+            return View();
+        }
+
+        public IActionResult PlaceOrder()
+        {
+            var ctx = new NASS_RedoContext();
+
+
+            ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
+            //ViewData["ProductName"] = new SelectList(_context.Product, "Name", "Name"); update models from db first
+            //ViewData["WorkflowName"] = new SelectList(_context.Workflow, "Name", "Name");
             return View();
         }
 
