@@ -7,7 +7,6 @@ namespace NASS_Redo_Site.Models
     {
         public PersonInfo()
         {
-            PersonContact = new HashSet<PersonContact>();
             PersonSensitive = new HashSet<PersonSensitive>();
             TaxCollector = new HashSet<TaxCollector>();
         }
@@ -22,7 +21,7 @@ namespace NASS_Redo_Site.Models
 
         public virtual Address Addr { get; set; }
         public virtual Person Person { get; set; }
-        public virtual ICollection<PersonContact> PersonContact { get; set; }
+        public virtual PersonContact PersonContact { get; set; }
         public virtual ICollection<PersonSensitive> PersonSensitive { get; set; }
         public virtual ICollection<TaxCollector> TaxCollector { get; set; }
     }

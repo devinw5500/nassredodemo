@@ -26,9 +26,20 @@ namespace NASS_Redo_Site.Controllers
             _context = context;
             _userManager = userManager;
         }
-
         public IActionResult Index()
         {
+            
+
+            if (false)
+            {
+                ViewData["IsAdmin"] = new String(User.Identity.Name);
+                Debug.WriteLine("admin check passed");
+            }
+            else
+            {
+                ViewData["IsAdmin"] = new String(User.Identity.Name);
+                Debug.WriteLine("admin check not passed");
+            }
             return View();
         }
 
@@ -572,12 +583,24 @@ namespace NASS_Redo_Site.Controllers
 
         public IActionResult PlaceOrder()
         {
+            return View();
+        }
+        public IActionResult PlaceRefiOrder()
+        {
             var ctx = new NASS_RedoContext();
 
 
             ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
-            //ViewData["ProductName"] = new SelectList(_context.Product, "Name", "Name"); update models from db first
-            //ViewData["WorkflowName"] = new SelectList(_context.Workflow, "Name", "Name");
+            ViewData["ProductName"] = new SelectList(_context.Product, "ProductUid", "ProductUid");
+            return View();
+        }
+        public IActionResult PlacePurchaseOrder()
+        {
+            var ctx = new NASS_RedoContext();
+
+
+            ViewData["StateName"] = new SelectList(_context.State, "Name", "Name");
+            ViewData["ProductName"] = new SelectList(_context.Product, "ProductUid", "ProductUid"); 
             return View();
         }
 

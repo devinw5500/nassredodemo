@@ -13,6 +13,7 @@ namespace NASS_Redo_Site.Models
         }
 
         public int WorkflowId { get; set; }
+        public string WorkflowUid { get; set; }
 
         public virtual ICollection<ProductOrderDetail> ProductOrderDetail { get; set; }
         public virtual ICollection<WorkflowDetails> WorkflowDetails { get; set; }

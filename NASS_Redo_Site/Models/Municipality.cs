@@ -13,7 +13,9 @@ namespace NASS_Redo_Site.Models
 
         public int MunicipalityId { get; set; }
         public string Name { get; set; }
+        public int StateId { get; set; }
 
+        public virtual State State { get; set; }
         public virtual ICollection<ColInMunicipality> ColInMunicipality { get; set; }
         public virtual ICollection<MunInCounty> MunInCounty { get; set; }
     }

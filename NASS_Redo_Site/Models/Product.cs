@@ -16,6 +16,7 @@ namespace NASS_Redo_Site.Models
         }
 
         public int ProductId { get; set; }
+        public string ProductUid { get; set; }
 
         public virtual ICollection<ProdInGroup> ProdInGroup { get; set; }
         public virtual ICollection<ProductInList> ProductInList { get; set; }

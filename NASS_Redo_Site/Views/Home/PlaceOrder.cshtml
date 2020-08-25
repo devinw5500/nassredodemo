@@ -3,95 +3,21 @@
 }
 
 
-<h1>Create</h1>
+<h1>Type</h1>
 
-<h4>Order</h4>
 <hr />
 <div class="container-fluid">
     <form method="post" asp-action="">
         <div class="form-row">
-            <h4 class="text-info">Personal Information</h4>
+            <h4 class="text-info">What kind of order is this?</h4>
         </div>
         <div class="form-row">
             <div class="col">
-                <input type="text" class="form-control" id="FNameText" name="FNameText" value="@ViewData["FNameText"]" placeholder="First Name" />
-            </div>
-            <div class="col-1">
-                <input type="text" class="form-control" id="MIText" name="MIText" value="@ViewData["MIText"]" placeholder="MI" />
+                <button class="btn-primary" id="RefiBtn"  asp-action="PlaceRefiOrder">Refinance</button>
             </div>
             <div class="col">
-                <input type="text" class="form-control" id="LNameText" name="LNameText" value="@ViewData["LNameText"]" placeholder="Last Name" />
+                <button class="btn-primary" id="PurchaseBtn"  asp-action="PlacePurchaseOrder">Purchase</button>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="col-4">
-                <input type="date" class="form-control" id="DOBText" name="DOBText" value="@ViewData["DOBText"]" />
-            </div>
-        </div>
-        <div class="form-row">
-            <h4 class="text-info">Address Information</h4>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <input type="text" class="form-control" id="AddrLine1Text" name="AddrLine1Text" value="@ViewData["AddrLine1Text"]" placeholder="Address Line 1" />
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" id="AddrLine2Text" name="AddrLine2Text" value="@ViewData["AddrLine2Text"]" placeholder="Address Line 2" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <select class="form-control flex-column" id="StateSelect" name="StateSelect" value="@ViewData["StateSelect"]" asp-items="ViewBag.StateName">
-                    <option value="">-State-</option>
-                    <option value="TestState">TestState</option>
-                </select>
-            </div>
-            <div class="col">
-                <select class="form-control flex-column" id="ZipSelect" name="ZipSelect" value="@ViewData["ZipSelect"]" asp-items="ViewBag.ZipName">
-                    <option value="">-ZIP-</option>
-                    <option value="TestZip">TestZip</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <select class="form-control flex-column" id="CitySelect" name="CitySelect" value="@ViewData["CitySelect"]" asp-items="ViewBag.CityName">
-                    <option value="">-City-</option>
-                    <option value="TestCity">TestCity</option>
-                </select>
-            </div>
-            <div class="col">
-                <select class="form-control flex-column" id="CountySelect" name="CountySelect" value="@ViewData["CountySelect"]" asp-items="ViewBag.CountyName">
-                    <option value="">-County-</option>
-                    <option value="TestCounty">TestCounty</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
-                <input type="text" class="form-control" id="ParcelText" name="ParcelText" value="@ViewData["ParcelText"]" placeholder="Parcel ID (If Applicable)" />
-            </div>
-        </div>
-        <div class="form-row">
-            <h4 class="text-info">Order Details</h4>
-        </div>
-        <div class="form-row">
-            <label for="ProductSelect">Select Product</label>
-            <select class="form-control flex-column" id="ProductSelect" name="ProductSelect" value="@ViewData["ProductSelect"]" asp-items="ViewBag.ProductName">
-                <option value="">-Product-</option>
-                <option value="TestProduct">TestProduct</option>
-            </select>
-        </div>
-        <div class="form-row">
-            <label for="ProductSelect">Select Workflow</label>
-            <select class="form-control flex-column" id="ProductSelect" name="ProductSelect" value="@ViewData["ProductSelect"]" asp-items="ViewBag.ProductName">
-                <option value="">-Product-</option>
-                <option value="TestProduct">TestProduct</option>
-            </select>
-        </div>
-        <div class="col"></div>
-        <div class="form-group">
-            <input type="submit" value="CreatePerson" class="btn btn-primary" />
         </div>
     </form>
 </div>

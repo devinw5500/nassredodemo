@@ -490,3 +490,10 @@ D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Re
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cs
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\NASS_Redo_Site.MvcApplicationPartsAssemblyInfo.cache
 D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\PlaceOrder.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Products\Create.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Products\Delete.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Products\Details.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Products\Edit.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\PlacePurchaseOrder.cshtml.g.cs
+D:\Work\GithubRepos\NASS-RedoSite\NASS_Redo_Site\obj\Debug\netcoreapp3.1\Razor\Views\Home\PlaceRefiOrder.cshtml.g.cs

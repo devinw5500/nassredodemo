@@ -12,6 +12,7 @@ namespace NASS_Redo_Site.Models
         }
 
         public int OrderId { get; set; }
+        public string OrderUid { get; set; }
 
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
         public virtual ICollection<ReportOnOrder> ReportOnOrder { get; set; }

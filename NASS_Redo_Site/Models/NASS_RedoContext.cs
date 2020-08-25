@@ -126,7 +126,7 @@ namespace NASS_Redo_Site.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=NASS_Redo;Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=NASS_Redo;Integrated Security=True");
             }
         }
 
@@ -955,6 +955,14 @@ namespace NASS_Redo_Site.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.StateId).HasColumnName("StateID");
+
+                entity.HasOne(d => d.State)
+                    .WithMany(p => p.Municipality)
+                    .HasForeignKey(d => d.StateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Municipality_State");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -962,6 +970,12 @@ namespace NASS_Redo_Site.Models
                 entity.ToTable("Order", "Order");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.OrderUid)
+                    .IsRequired()
+                    .HasColumnName("OrderUID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<OrderClient>(entity =>
@@ -1170,15 +1184,16 @@ namespace NASS_Redo_Site.Models
                 entity.ToTable("PersonContact", "People");
 
                 entity.HasIndex(e => e.PersonInfoId)
-                    .HasName("fkIdx_396");
+                    .HasName("fkIdx_396")
+                    .IsUnique();
 
                 entity.Property(e => e.PersonContactId).HasColumnName("PersonContactID");
 
                 entity.Property(e => e.PersonInfoId).HasColumnName("PersonInfoID");
 
                 entity.HasOne(d => d.PersonInfo)
-                    .WithMany(p => p.PersonContact)
-                    .HasForeignKey(d => d.PersonInfoId)
+                    .WithOne(p => p.PersonContact)
+                    .HasForeignKey<PersonContact>(d => d.PersonInfoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FKPersonInfo_PersonContact");
             });
@@ -1368,6 +1383,12 @@ namespace NASS_Redo_Site.Models
                 entity.ToTable("Product", "Product");
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ProductUid)
+                    .IsRequired()
+                    .HasColumnName("ProductUID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<ProductGroup>(entity =>
@@ -2453,6 +2474,12 @@ namespace NASS_Redo_Site.Models
                 entity.ToTable("Workflow", "Product");
 
                 entity.Property(e => e.WorkflowId).HasColumnName("WorkflowID");
+
+                entity.Property(e => e.WorkflowUid)
+                    .IsRequired()
+                    .HasColumnName("WorkflowUID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<WorkflowDetails>(entity =>
