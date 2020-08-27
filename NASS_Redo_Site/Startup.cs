@@ -28,7 +28,7 @@ namespace NASS_Redo_Site
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var conn = @"Server=localhost;Database=NASS_Redo;Integrated Security=True";
+            var conn = @"Server = mycomputer.loseyourip.com; User ID = devin; Password = Starranger1834!; Database = NASS_Redo; ";
             services.AddDbContext<NASS_RedoContext>(options => 
                 options.UseSqlServer(conn));
             services.AddDbContext<ApplicationDbContext>(options =>

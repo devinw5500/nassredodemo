@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1II7eiP7EaDOTgPtzZufkBZUYHULSM3TtWyL63iC6HCkzZFg6iDYzyBD0kyunI7XB1RoLBF6UIECcbWMYbryIA==",
+  "dgSpecHash": "MOQgxJSNPomyHi61UDzeb0igJgyh8y2RaNm5UMXNqSK+OznauP8RwBGQDo/xY4RbGjUzChV7Xl7sJ20xobgWSg==",
   "success": true,
-  "projectFilePath": "D:\\Work\\GithubRepos\\NASS-RedoSite\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
+  "projectFilePath": "D:\\Work\\GithubRepos\\nassredodemo\\NASS_Redo_Site\\NASS_Redo_Site.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\djluk\\.nuget\\packages\\bootstrap\\4.5.0\\bootstrap.4.5.0.nupkg.sha512",
     "C:\\Users\\djluk\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
