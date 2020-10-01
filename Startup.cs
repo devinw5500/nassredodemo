@@ -31,9 +31,7 @@ namespace TaxSystemNASS
         {
             var conn = @"Server=tcp:nassredotesting.database.windows.net,1433;Database=Nass_Redo_Azure;Persist Security Info=False;User ID=jesfable@gmail.com@nassredotesting;Password=J3st3r1998!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<Nass_Redo_AzureContext>(options => options.UseSqlServer(conn));
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             // TODO: Make passwords stronger requirements 
