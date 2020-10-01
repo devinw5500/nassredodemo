@@ -1,6 +1,0 @@
-Current Issues:
-Trying to get the City, County, and ZIP selects to populate based on the state chosen in previous view.
-Controller for views: HomeController.cs
-Choose state in CreatePersonState.cshtml
-Pass state data to CreatePerson.cshtml
-Relevant Controller methods start at line 31 in HomeController.cs

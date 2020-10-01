@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "PlaceOrder";
+}
+
+<style>
+    .lbl{
+        margin-bottom:0rem;
+    }
+</style>
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="container-fluid">
+    <form method="post" asp-controller="PlaceOrders" asp-action="ReviewPurchased">
+        <div class="form-row">
+            <h4 class="text-info">Personal Information for Buyer</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="BuyFNameText">Buyer's First Name</label>
+                <input type="text" class="form-control" id="BuyFNameText" name="BuyFNameText" value="@ViewData["BuyFNameText"]" placeholder="First Name" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="BuyMIText">Buyer's Middle Initial</label>
+                <input type="text" class="form-control" id="BuyMIText" name="BuyMIText" value="@ViewData["BuyMIText"]" placeholder="MI" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="BuyLNameText">Buyer's Last Name</label>
+                <input type="text" class="form-control" id="BuyLNameText" name="BuyLNameText" value="@ViewData["BuyLNameText"]" placeholder="Last Name" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="BuyDOBText">Buyer's Date of Birth</label>
+                <input type="date" class="form-control" id="BuyDOBText" name="BuyDOBText" value="@ViewData["BuyDOBText"]" />
+            </div>
+            <div class="col-8">
+                <label class="lbl" for="BuySSNText">Buyer's Social Security Number</label>
+                <input type="text" class="form-control" id="BuySSNText" name="BuySSNText" value="@ViewData["BuySSNText"]" placeholder="Buyer SSN - Optional*" />
+                <small class="text-muted">*Not supplying SSN will prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Buyer's Contact Information</h4>
+            <small>Please enter at least one field.</small>
+        </div>
+        <div class="form-row">
+            <div class="col-6">
+                <label class="lbl" for="BuyEmailText">Email</label>
+                <input type="text" class="form-control" id="BuyEmailText" name="BuyEmailText" value="@ViewData["BuyEmailText"]" placeholder="Email" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="PhoneText">Phone</label>
+                <input type="text" class="form-control" id="BuyPhoneText" name="BuyPhoneText" value="@ViewData["BuyPhoneText"]" placeholder="Phone" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="BuyFaxText">Fax</label>
+                <input type="text" class="form-control" id="BuyFaxText" name="BuyFaxText" value="@ViewData["BuyFaxText"]" placeholder="Fax" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Personal Information for Seller</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="SellFNameTest">Seller's First Name</label>
+                <input type="text" class="form-control" id="SellFNameText" name="SellFNameText" value="@ViewData["SellFNameText"]" placeholder="First Name" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="SellMIText">Seller's Middle Initial</label>
+                <input type="text" class="form-control" id="SellMIText" name="SellMIText" value="@ViewData["SellMIText"]" placeholder="MI" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="SellLNameText">Seller's Last Name</label>
+                <input type="text" class="form-control" id="SellLNameText" name="SellLNameText" value="@ViewData["SellLNameText"]" placeholder="Last Name" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="SellDOBText">Seller's Date of Birth</label>
+                <input type="date" class="form-control" id="SellDOBText" name="SellDOBText" value="@ViewData["SellDOBText"]" />
+            </div>
+            <div class="col-8">
+                <label class="lbl" for="SellSSNText">Seller's Social Security Number</label>
+                <input type="text" class="form-control" id="SellSSNText" name="SellSSNText" value="@ViewData["SellSSNText"]" placeholder="Seller SSN - Optional*" />
+                <small class="text-muted">*Not supplying SSN will prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Seller's Contact Information</h4>
+            <small>Please enter at least one field.</small>
+        </div>
+        <div class="form-row">
+            <div class="col-6">
+                <label class="lbl" for="SellEmailText">Email</label>
+                <input type="text" class="form-control" id="SellEmailText" name="SellEmailText" value="@ViewData["SellEmailText"]" placeholder="Email" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="SellPhoneText">Phone</label>
+                <input type="text" class="form-control" id="SellPhoneText" name="SellPhoneText" value="@ViewData["SellPhoneText"]" placeholder="Phone" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="SellFaxText">Fax</label>
+                <input type="text" class="form-control" id="SellFaxText" name="SellFaxText" value="@ViewData["SellFaxText"]" placeholder="Fax" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Seller Forwarding Address Information</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="SellAddrLn1">Forwarding Address Line 1</label>
+                <input type="text" class="form-control" id="SellAddrLn1" name="SellAddrLn1" value="@ViewData["SellAddrLn1"]" placeholder="Address Line 1" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="SellAddrLn2">Forwarding Address Line 2</label>
+                <input type="text" class="form-control" id="SellAddrLn2" name="SellAddrLn2" value="@ViewData["SellAddrLn2"]" placeholder="Address Line 2" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-2">
+                <label class="lbl" for="SellState">Forwarding State</label>
+                <input type="text" class="form-control" id="SellState" name="SellState" value="@ViewData["SellState"]" placeholder="State" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="SellZIP">Forwarding ZIP</label>
+                <input type="text" class="form-control" id="SellZip" name="SellZip" value="@ViewData["SellZip"]" placeholder="ZIP" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="SellCounty">Forwarding County</label>
+                <input type="text" class="form-control" id="SellCounty" name="SellCounty" value="@ViewData["SellCounty"]" placeholder="County - Optional*" />
+                <small class="text-muted">*County is optional but can help eliminate wrong address mistakes.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="SellCity">Forwarding City</label>
+                <input type="text" class="form-control" id="SellCity" name="SellCity" value="@ViewData["SellCity"]" placeholder="City" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="SellParcel">Forwarding Parcel ID</label>
+                <input type="text" class="form-control" id="SellParcel" name="SellParcel" value="@ViewData["SellParcel"]" placeholder="Parcel ID" />
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Property Information</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="PropAddrLn1">Property Address Line 1</label>
+                <input type="text" class="form-control" id="PropAddrLn1" name="PropAddrLn1" value="@ViewData["PropAddrLn1"]" placeholder="Address Line 1" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="PropAddrLn2">Property Address Line 2</label>
+                <input type="text" class="form-control" id="PropAddrLn2" name="PropAddrLn2" value="@ViewData["PropAddrLn2"]" placeholder="Address Line 2" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-2">
+                <label class="lbl" for="PropState">Property State</label>
+                <input type="text" class="form-control" id="PropState" name="PropState" value="@ViewData["PropState"]" placeholder="State" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="PropZip">Property ZIP</label>
+                <input type="text" class="form-control" id="PropZip" name="PropZip" value="@ViewData["PropZip"]" placeholder="ZIP" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="PropCounty">Property County</label>
+                <input type="text" class="form-control" id="PropCounty" name="PropCounty" value="@ViewData["PropCounty"]" placeholder="County - Optional*" />
+                <small class="text-muted">*County is optional but can help eliminate wrong address mistakes.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="PropCity">Property City</label>
+                <input type="text" class="form-control" id="PropCity" name="PropCity" value="@ViewData["PropCity"]" placeholder="City" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="PropParcel">Property Parcel</label>
+                <input type="text" class="form-control" id="PropParcel" name="PropParcel" value="@ViewData["PropParcel"]" placeholder="Parcel ID" />
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Order Details</h4>
+        </div>
+        <div class="form-row">
+            <label for="ProductSelect">Select Product</label>
+            <select class="form-control flex-column" id="Product" name="Product" value="@ViewData["Product"]">
+                <option value="">-Product-</option>
+                <option value="Tax">Tax</option>
+                <option value="Municpal Lien">Municipal Lien</option>
+                <option value="Tax + Muni">Tax + Municipal Lien</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" value="CreatePerson" id="submitbtn" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

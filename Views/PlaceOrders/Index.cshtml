@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h1>Type</h1>
+
+<div class="container-fluid">
+    <form method="post" asp-action="">
+        <div class="form-row">
+            <h6 class="text-info">What kind of order is this?</h6>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <button class="btn-primary" id="RefiBtn" asp-controller="PlaceOrders" asp-action="PlaceRefi">Refinance</button>
+            </div>
+            <div class="col">
+                <button class="btn-primary" id="PurchaseBtn" asp-controller="PlaceOrders" asp-action="PlacePurchase">Purchase</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

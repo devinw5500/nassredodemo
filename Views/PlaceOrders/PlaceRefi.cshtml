@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "PlaceOrder";
+}
+
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="container-fluid">
+    <form method="post" asp-action="ReviewRefi">
+        <div class="form-row">
+            <h4 class="text-info">Personal Information for Current Owner</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="RefiFNameText">Owner's First Name</label>
+                <input type="text" class="form-control" id="RefiFNameText" name="RefiFNameText" value="@ViewData["RefiFNameText"]" placeholder="First Name" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="RefiMIText">Owner's Middle Initial</label>
+                <input type="text" class="form-control" id="RefiMIText" name="RefiMIText" value="@ViewData["RefiMIText"]" placeholder="MI" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="RefiLNameText">Owner's Last Name</label>
+                <input type="text" class="form-control" id="RefiLNameText" name="RefiLNameText" value="@ViewData["RefiLNameText"]" placeholder="Last Name" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="RefiDOBText">Owner's Date of Birth</label>
+                <input type="date" class="form-control" id="RefiDOBText" name="RefiDOBText" value="@ViewData["RefiDOBText"]" />
+            </div>
+            <div class="col-8">
+                <label class="lbl" for="RefiSSNText">Owner's Social Security Number</label>
+                <input type="text" class="form-control" id="RefiSSNText" name="RefiSSNText" value="@ViewData["RefiSSNText"]" placeholder="SSN - Optional*" />
+                <small class="text-muted">*Not supplying SSN will prevent the order from being completed until it is supplied. You can add this later if needed.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Contact Information</h4>
+            <small>Please enter at least one field.</small>
+        </div>
+        <div class="form-row">
+            <div class="col-6">
+                <label class="lbl" for="RefiEmailText">Email</label>
+                <input type="text" class="form-control" id="RefiEmailText" name="RefiEmailText" value="@ViewData["RefiEmailText"]" placeholder="Email" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="RefiPhoneText">Phone</label>
+                <input type="text" class="form-control" id="RefiPhoneText" name="RefiPhoneText" value="@ViewData["RefiPhoneText"]" placeholder="Phone" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-4">
+                <label class="lbl" for="RefiFaxText">Fax</label>
+                <input type="text" class="form-control" id="RefiFaxText" name="RefiFaxText" value="@ViewData["RefiFaxText"]" placeholder="Fax" />
+                <small class="text-muted">Optional</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Property Information</h4>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="RefiAddrLn1">Address Line 1</label>
+                <input type="text" class="form-control" id="RefiAddrLn1" name="RefiAddrLn1" value="@ViewData["RefiAddrLn1"]" placeholder="Address Line 1" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="RefiAddrLn2">Address Line 2</label>
+                <input type="text" class="form-control" id="RefiAddrLn2" name="RefiAddrLn2" value="@ViewData["RefiAddrLn2"]" placeholder="Address Line 2" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-2">
+                <label class="lbl" for="RefiState">State</label>
+                <input type="text" class="form-control" id="RefiState" name="RefiState" value="@ViewData["RefiState"]" placeholder="State" />
+            </div>
+            <div class="col-3">
+                <label class="lbl" for="RefiZip">ZIP</label>
+                <input type="text" class="form-control" id="RefiZip" name="RefiZip" value="@ViewData["RefiZip"]" placeholder="ZIP" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="RefiCounty">County</label>
+                <input type="text" class="form-control" id="RefiCounty" name="RefiCounty" value="@ViewData["RefiCounty"]" placeholder="County - Optional*" />
+                <small class="text-muted">*County is optional but can help eliminate wrong address mistakes.</small>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                <label class="lbl" for="RefiCity">City</label>
+                <input type="text" class="form-control" id="RefiCity" name="RefiCity" value="@ViewData["RefiCity"]" placeholder="City" />
+            </div>
+            <div class="col">
+                <label class="lbl" for="RefiParcel">Parcel ID Number</label>
+                <input type="text" class="form-control" id="RefiParcel" name="RefiParcel" value="@ViewData["RefiParcel"]" placeholder="Parcel ID" />
+            </div>
+        </div>
+        <div class="form-row">
+            <h4 class="text-info">Order Details</h4>
+        </div>
+        <div class="form-row">
+            <label class="lbl" for="ProductSelect">Select Product</label>
+            <select class="form-control flex-column" id="ProductSold" value="@ViewData["ProductSold"]" name="ProductSold">
+                <option value="">-Product-</option>
+                <option value="Tax">Tax</option>
+                <option value="Municpal Lien">Municipal Lien</option>
+                <option value="Tax + Muni">Tax + Municipal Lien</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" id="submitbtn" value="Submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

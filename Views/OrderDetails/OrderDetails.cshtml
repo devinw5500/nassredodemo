@@ -1,0 +1,128 @@
+﻿@model TaxSystemNASS.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderGuid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderGuid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderPlaced)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderPlaced)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderEta)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrderEta)
+        </dd>
+    </dl>
+    <div>
+        <a asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderId">Edit Order</a> 
+    </div>
+    <br />
+    <h4>People</h4>
+    <table>
+        <tr>
+            <th>Full Name</th>
+            <th style="padding-left:1em;">DOB</th>
+            <th style="padding-left:1em;">Contact Info</th>
+            <th style="padding-left:1em;">Type</th>
+            <th style="padding-left:5em;">Actions</th>
+        </tr>
+        @foreach (PersonalInfo person in ViewBag.People)
+        {
+            <tr>
+                <td>@person.FirstName @person.MiddleInitial @person.LastName</td>
+                <td style="padding-left:1em;">@person.Dob</td>
+                <td style="padding-left:1em;">
+                    Email: @person.Email <br />
+                    Phone: @person.Phone <br />
+                    Fax: @person.Fax
+                </td>
+                @foreach (PersonInOrder type in ViewBag.PeopleType)
+                {
+                    @if (type.PersonId == person.PersonalInfoId)
+                    {
+                        <td style="padding-left:5em;">@type.Type</td>
+                    }
+                }
+                <td style="padding-left:5em;">
+                    <a asp-controller="PersonalInfoes" asp-action="Edit" asp-route-id="@person.PersonalInfoId">Edit Person</a> |
+                    <a asp-controller="PersonalInfoes" asp-action="Details" asp-route-id="@person.PersonalInfoId">View Sensitive Data</a> 
+                </td>
+            </tr>
+
+        }
+    </table>
+    <br />
+    <h4>Addresses</h4>
+    <table>
+        <tr>
+            <th style="padding-left:2em;">Address Line 1</th>
+            <th style="padding-left:2em;">Address Line 2</th>
+            <th style="padding-left:2em;">City</th>
+            <th style="padding-left:2em;">County</th>
+            <th style="padding-left:2em;">ZIP</th>
+            <th style="padding-left:2em;">State</th>
+            <th style="padding-left:2em;">Parcel ID</th>
+            <th style="padding-left:2em;">Type</th>
+            <th style="padding-left:2em;">Action</th>
+        </tr>
+        @foreach (Address addr in ViewBag.Address)
+        {
+            <tr>
+                <td style="padding-left:2em;">@addr.AddressLine1</td>
+                <td style="padding-left:2em;">@addr.AddressLine2</td>
+                <td style="padding-left:2em;">@addr.City</td>
+                <td style="padding-left:2em;">@addr.County</td>
+                <td style="padding-left:2em;">@addr.Zip</td>
+                <td style="padding-left:2em;">@addr.StateAbbr</td>
+                <td style="padding-left:2em;">@addr.ParcelId</td>
+                @foreach (AddressInOrder type in ViewBag.AddressType)
+                {
+                    @if (type.AddressId == addr.AddressId)
+                    {
+                        <td style="padding-left:2em;">@type.Type</td>
+                    }
+                }
+                <td style="padding-left:2em;"><a asp-controller="Addresses" asp-action="Edit" asp-route-id="@addr.AddressId">Edit Address</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <h4>Product Purchased</h4>
+    @foreach (Product product in ViewBag.Product)
+    {
+        <p>Name: @product.Name</p>
+        <p>Description: @product.Description</p>
+    }
+    <p></p>
+</div>
+<div>
+    <a asp-action="Index">Back to  List</a>
+</div>
