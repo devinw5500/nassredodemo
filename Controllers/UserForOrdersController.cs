@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,7 +23,7 @@ namespace TaxSystemNASS.Controllers
             return View(await nass_Redo_AzureContext.ToListAsync());
         }
 
-        // GET: UserForOrders/Details/5
+        // GET: UserForOrders/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -54,7 +52,7 @@ namespace TaxSystemNASS.Controllers
         }
 
         // POST: UserForOrders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,7 +88,7 @@ namespace TaxSystemNASS.Controllers
         }
 
         // POST: UserForOrders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

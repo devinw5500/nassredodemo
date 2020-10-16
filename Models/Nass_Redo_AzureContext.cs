@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace TaxSystemNASS.Models
 {
@@ -31,7 +29,6 @@ namespace TaxSystemNASS.Models
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductInOrder> ProductInOrder { get; set; }
         public virtual DbSet<UserForOrder> UserForOrder { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

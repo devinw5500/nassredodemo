@@ -23,6 +23,7 @@ namespace TaxSystemNASS.Models
         public string HashedSsn { get; set; }
 
         public virtual ICollection<PersonInOrder> PersonInOrder { get; set; }
+
         public string toSqlStatement()
         {
             StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[PersonalInfo] VALUES (");

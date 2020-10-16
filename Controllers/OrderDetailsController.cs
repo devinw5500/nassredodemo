@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaxSystemNASS.Models;
 
@@ -17,13 +13,15 @@ namespace TaxSystemNASS.Controllers
 
         public OrderDetailsController(Nass_Redo_AzureContext context)
         {
-            _context = context; 
+            _context = context;
         }
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Order.ToListAsync());
         }
+
         public async Task<IActionResult> OrderDetails(int? id)
         {
             var ctx = new Nass_Redo_AzureContext();
@@ -45,16 +43,13 @@ namespace TaxSystemNASS.Controllers
             var addresstype = _context.AddressInOrder.FromSqlRaw(@$"SELECT [AddressInOrder].* FROM [AddressInOrder] INNER JOIN [Order] ON [Order].[OrderID] = [AddressInOrder].[OrderID] WHERE [Order].[OrderID] = {id} ORDER BY [AddressInOrder].[AddressID] ASC;").ToList();
             var product = _context.Product.FromSqlRaw(@$"SELECT [Product].* FROM [Product] INNER JOIN [ProductInOrder] ON [ProductInOrder].[ProductID] = [Product].[ProductID] INNER JOIN [Order] ON [Order].[OrderID] = [ProductInOrder].[OrderID] WHERE [Order].[OrderID] = {id};").ToList();
 
-
             ViewBag.People = people;
             ViewBag.PeopleType = peopletype;
             ViewBag.Address = address;
             ViewBag.AddressType = addresstype;
             ViewBag.Product = product;
 
-
             return View(order);
         }
-
     }
 }

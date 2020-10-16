@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace TaxSystemNASS.Models
 {
@@ -12,6 +10,7 @@ namespace TaxSystemNASS.Models
         public bool? Urgent { get; set; }
 
         public virtual Order Order { get; set; }
+
         public string toSqlStatement()
         {
             StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[OrderComment] VALUES (");
