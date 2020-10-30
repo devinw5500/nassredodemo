@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TaxSystemNASS.Models
 {
@@ -23,14 +22,5 @@ namespace TaxSystemNASS.Models
         public string HashedSsn { get; set; }
 
         public virtual ICollection<PersonInOrder> PersonInOrder { get; set; }
-
-        public string toSqlStatement()
-        {
-            StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[PersonalInfo] VALUES (");
-
-            sqlInsertAddress.AppendFormat(@"'{0}', '{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')", PersonalInfoId, PersonalInfoGuid, FirstName, MiddleInitial, LastName, Dob, Email, Phone, Fax, HashedSsn);
-
-            return sqlInsertAddress.ToString();
-        }
     }
 }

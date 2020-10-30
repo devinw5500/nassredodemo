@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="alert-danger" style="padding-bottom:0">BETA</h1>
+    <small>This site is a WIP! Find any issues or have a suggestion? Please email tech@nasstitle.com</small>
+    <h4 class="display-4">Tax Product Order System</h4>
+
+    <div class="jumbotron jumbotron-fluid">
+        <h4 class="display-4">Tech</h4>
+        <a class="btn btn-primary" asp-action="AdminHome">Admin</a>
+        <a class="btn btn-primary" asp-action="ClientHome">Client</a>
+        <a class="btn btn-primary" asp-action="EmployeeHome">Employee</a>
+    </div>
+
+    <p>Click here to <a asp-controller="PlaceOrders" asp-action="Index">place an order</a>.</p>
+    <p>Click here to <a asp-controller="OrderDetails" asp-action="Index">view the list of orders</a>.</p>
+    <p>Click here to <a asp-controller="OrderDetails" asp-action="CompletedOrders">view the list of completed orders</a>.</p>
+</div>

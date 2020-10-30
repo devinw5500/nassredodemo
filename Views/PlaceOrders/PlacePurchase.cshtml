@@ -3,8 +3,8 @@
 }
 
 <style>
-    .lbl{
-        margin-bottom:0rem;
+    .lbl {
+        margin-bottom: 0rem;
     }
 </style>
 
@@ -39,7 +39,7 @@
             <div class="col-8">
                 <label class="lbl" for="BuySSNText">Buyer's Social Security Number</label>
                 <input type="text" class="form-control" id="BuySSNText" name="BuySSNText" value="@ViewData["BuySSNText"]" placeholder="Buyer SSN - Optional*" />
-                <small class="text-muted">*Not supplying SSN will prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
+                <small class="text-muted">*Not supplying SSN may prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
             </div>
         </div>
         <div class="form-row">
@@ -91,7 +91,7 @@
             <div class="col-8">
                 <label class="lbl" for="SellSSNText">Seller's Social Security Number</label>
                 <input type="text" class="form-control" id="SellSSNText" name="SellSSNText" value="@ViewData["SellSSNText"]" placeholder="Seller SSN - Optional*" />
-                <small class="text-muted">*Not supplying SSN will prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
+                <small class="text-muted">*Not supplying SSN may prevent the order from being completed until it is supplied.  You can add this later if needed.</small>
             </div>
         </div>
         <div class="form-row">
@@ -141,19 +141,15 @@
                 <input type="text" class="form-control" id="SellZip" name="SellZip" value="@ViewData["SellZip"]" placeholder="ZIP" />
             </div>
             <div class="col">
-                <label class="lbl" for="SellCounty">Forwarding County</label>
-                <input type="text" class="form-control" id="SellCounty" name="SellCounty" value="@ViewData["SellCounty"]" placeholder="County - Optional*" />
-                <small class="text-muted">*County is optional but can help eliminate wrong address mistakes.</small>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col">
                 <label class="lbl" for="SellCity">Forwarding City</label>
                 <input type="text" class="form-control" id="SellCity" name="SellCity" value="@ViewData["SellCity"]" placeholder="City" />
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="col">
-                <label class="lbl" for="SellParcel">Forwarding Parcel ID</label>
-                <input type="text" class="form-control" id="SellParcel" name="SellParcel" value="@ViewData["SellParcel"]" placeholder="Parcel ID" />
+                <label class="lbl" for="SellCounty">Forwarding County</label>
+                <input type="text" class="form-control" id="SellCounty" name="SellCounty" value="@ViewData["SellCounty"]" placeholder="County" />
             </div>
         </div>
         <div class="form-row">
@@ -178,16 +174,16 @@
                 <label class="lbl" for="PropZip">Property ZIP</label>
                 <input type="text" class="form-control" id="PropZip" name="PropZip" value="@ViewData["PropZip"]" placeholder="ZIP" />
             </div>
+
             <div class="col">
-                <label class="lbl" for="PropCounty">Property County</label>
-                <input type="text" class="form-control" id="PropCounty" name="PropCounty" value="@ViewData["PropCounty"]" placeholder="County - Optional*" />
-                <small class="text-muted">*County is optional but can help eliminate wrong address mistakes.</small>
+                <label class="lbl" for="PropCity">Property City</label>
+                <input type="text" class="form-control" id="PropCity" name="PropCity" value="@ViewData["PropCity"]" placeholder="City" />
             </div>
         </div>
         <div class="form-row">
             <div class="col">
-                <label class="lbl" for="PropCity">Property City</label>
-                <input type="text" class="form-control" id="PropCity" name="PropCity" value="@ViewData["PropCity"]" placeholder="City" />
+                <label class="lbl" for="PropCounty">Property County</label>
+                <input type="text" class="form-control" id="PropCounty" name="PropCounty" value="@ViewData["PropCounty"]" placeholder="County" />
             </div>
             <div class="col">
                 <label class="lbl" for="PropParcel">Property Parcel</label>
@@ -207,15 +203,12 @@
             </select>
         </div>
 
-
         <div class="form-group">
             <input type="submit" value="CreatePerson" id="submitbtn" class="btn btn-primary" />
         </div>
     </form>
 </div>
 
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

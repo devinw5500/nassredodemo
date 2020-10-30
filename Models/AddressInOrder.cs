@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace TaxSystemNASS.Models
+﻿namespace TaxSystemNASS.Models
 {
     public partial class AddressInOrder
     {
@@ -11,14 +9,5 @@ namespace TaxSystemNASS.Models
 
         public virtual Address Address { get; set; }
         public virtual Order Order { get; set; }
-
-        public string ToSqlStatement()
-        {
-            StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[AddressInOrder] VALUES (");
-
-            sqlInsertAddress.AppendFormat(@"'{0}', '{1}','{2}','{3}','{4}','{5}')", AddressInOrder1, AddressId, OrderId, Type, Address, Order);
-
-            return sqlInsertAddress.ToString();
-        }
     }
 }

@@ -1,17 +1,17 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TaxSystemNASS.Models;
 
 namespace TaxSystemNASS.Controllers
 {
     public class OrderCommentsController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public OrderCommentsController(Nass_Redo_AzureContext context)
+        public OrderCommentsController(NassRedoAzureContext context)
         {
             _context = context;
         }

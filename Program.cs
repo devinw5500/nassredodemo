@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace TaxSystemNASS
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -15,6 +16,8 @@ namespace TaxSystemNASS
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseSerilog((hostingContext, loggerConfig) =>
+                    loggerConfig.ReadFrom.Configuration(hostingContext.Configuration)
+                );
     }
 }

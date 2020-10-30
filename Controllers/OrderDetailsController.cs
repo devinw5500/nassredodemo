@@ -1,17 +1,19 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TaxSystemNASS.Models;
 
 namespace TaxSystemNASS.Controllers
 {
     public class OrderDetailsController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private NassRedoAzureContext _context;
 
-        public OrderDetailsController(Nass_Redo_AzureContext context)
+        public OrderDetailsController(NassRedoAzureContext context)
         {
             _context = context;
         }
@@ -22,9 +24,15 @@ namespace TaxSystemNASS.Controllers
             return View(await _context.Order.ToListAsync());
         }
 
+        [Authorize]
+        public async Task<IActionResult> CompletedOrders()
+        {
+            return View(await _context.Order.ToListAsync());
+        }
+
+        [Authorize]
         public async Task<IActionResult> OrderDetails(int? id)
         {
-            var ctx = new Nass_Redo_AzureContext();
             if (id == null)
             {
                 return NotFound();
@@ -42,14 +50,30 @@ namespace TaxSystemNASS.Controllers
             var address = _context.Address.FromSqlRaw(@$"SELECT [Address].* FROM [Address] INNER JOIN [AddressInOrder] ON [AddressInOrder].[AddressID] = [Address].[AddressID] INNER JOIN [Order] ON [Order].[OrderID] = [AddressInOrder].[OrderID] WHERE [Order].[OrderID] = {id} ORDER BY [Address].[AddressID] ASC;").ToList();
             var addresstype = _context.AddressInOrder.FromSqlRaw(@$"SELECT [AddressInOrder].* FROM [AddressInOrder] INNER JOIN [Order] ON [Order].[OrderID] = [AddressInOrder].[OrderID] WHERE [Order].[OrderID] = {id} ORDER BY [AddressInOrder].[AddressID] ASC;").ToList();
             var product = _context.Product.FromSqlRaw(@$"SELECT [Product].* FROM [Product] INNER JOIN [ProductInOrder] ON [ProductInOrder].[ProductID] = [Product].[ProductID] INNER JOIN [Order] ON [Order].[OrderID] = [ProductInOrder].[OrderID] WHERE [Order].[OrderID] = {id};").ToList();
+            var users = _context.UserForOrder.FromSqlRaw(@$"SELECT [UserForOrder].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [Order].[OrderID] = {id}").ToList();
 
             ViewBag.People = people;
             ViewBag.PeopleType = peopletype;
             ViewBag.Address = address;
             ViewBag.AddressType = addresstype;
             ViewBag.Product = product;
+            ViewBag.Users = users;
 
             return View(order);
+        }
+
+        public IActionResult ClaimOrder(int id)
+        {
+            string email = User.Identity.Name;
+            string type = "Employee";
+            StringBuilder sqlProcedureExecute = new StringBuilder("INSERT INTO [dbo].[UserForOrder] ([ASPNETUserID], [OrderID], [Type]) VALUES");
+
+            sqlProcedureExecute.AppendFormat(@"('{0}', {1}, '{2}')", email, id, type);
+
+            _context.Database.ExecuteSqlRaw(sqlProcedureExecute.ToString());
+            Debug.WriteLine(sqlProcedureExecute.ToString());
+
+            return RedirectToAction("OrderDetails", new { id = id });
         }
     }
 }

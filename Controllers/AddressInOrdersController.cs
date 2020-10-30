@@ -9,9 +9,9 @@ namespace TaxSystemNASS.Controllers
 {
     public class AddressInOrdersController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public AddressInOrdersController(Nass_Redo_AzureContext context)
+        public AddressInOrdersController(NassRedoAzureContext context)
         {
             _context = context;
         }

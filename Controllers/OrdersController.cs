@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TaxSystemNASS.Models;
+using TaxSystemNASS.Controllers;
 
 namespace TaxSystemNASS.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public OrdersController(Nass_Redo_AzureContext context)
+        public OrdersController(NassRedoAzureContext context)
         {
             _context = context;
         }
@@ -108,7 +109,7 @@ namespace TaxSystemNASS.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("OrderDetails", "OrderDetails", new { id = id });
             }
             return View(order);
         }

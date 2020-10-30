@@ -36,30 +36,96 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderGuid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderPlaced)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderEta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalCost)
-            </td>
+            @if (item.Status.Equals("Complete"))
+            {
 
-            <td>
-                <a asp-action="OrderDetails" asp-route-id="@item.OrderId">Details</a>
-            </td>
-        </tr>
+            }
+            else
+            {
+
+                @if (DateTime.Today == item.OrderEta)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderGuid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderPlaced)
+                        </td>
+                        <td style="color:darkorange">
+                            @Html.DisplayFor(modelItem => item.OrderEta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td style="color:darkorange">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCost)
+                        </td>
+
+                        <td>
+                            <a asp-action="OrderDetails" asp-route-id="@item.OrderId">Details</a>
+                        </td>
+                    </tr>
+                }
+                @if (DateTime.Today > item.OrderEta)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderGuid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderPlaced)
+                        </td>
+                        <td style="color:red">
+                            @Html.DisplayFor(modelItem => item.OrderEta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td style="color:red">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCost)
+                        </td>
+
+                        <td>
+                            <a asp-action="OrderDetails" asp-route-id="@item.OrderId">Details</a>
+                        </td>
+                    </tr>
+                }
+                @if (DateTime.Today < item.OrderEta)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderGuid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderPlaced)
+                        </td>
+                        <td style="color:green">
+                            @Html.DisplayFor(modelItem => item.OrderEta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td style="color:green">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalCost)
+                        </td>
+
+                        <td>
+                            <a asp-action="OrderDetails" asp-route-id="@item.OrderId">Details</a>
+                        </td>
+                    </tr>
+                }
+
+            }
         }
     </tbody>
 </table>

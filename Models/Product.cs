@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace TaxSystemNASS.Models
 {
@@ -16,14 +15,5 @@ namespace TaxSystemNASS.Models
         public decimal? BaseCost { get; set; } = null;
 
         public virtual ICollection<ProductInOrder> ProductInOrder { get; set; }
-
-        public string ToSqlStatement()
-        {
-            StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[PersonInOrder] VALUES (");
-
-            sqlInsertAddress.AppendFormat(@"'{0}', '{1}','{2}','{3}')", ProductId, Name, Description, BaseCost);
-
-            return sqlInsertAddress.ToString();
-        }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace TaxSystemNASS.Models
 {
-    public partial class Nass_Redo_AzureContext : DbContext
+    public partial class NassRedoAzureContext : DbContext
     {
-        public Nass_Redo_AzureContext()
+        public NassRedoAzureContext()
         {
         }
 
-        public Nass_Redo_AzureContext(DbContextOptions<Nass_Redo_AzureContext> options)
+        public NassRedoAzureContext(DbContextOptions<NassRedoAzureContext> options)
             : base(options)
         {
         }

@@ -9,9 +9,9 @@ namespace TaxSystemNASS.Controllers
 {
     public class UserForOrdersController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public UserForOrdersController(Nass_Redo_AzureContext context)
+        public UserForOrdersController(NassRedoAzureContext context)
         {
             _context = context;
         }
@@ -19,8 +19,8 @@ namespace TaxSystemNASS.Controllers
         // GET: UserForOrders
         public async Task<IActionResult> Index()
         {
-            var nass_Redo_AzureContext = _context.UserForOrder.Include(u => u.Aspnetuser).Include(u => u.Order);
-            return View(await nass_Redo_AzureContext.ToListAsync());
+            var nassRedoAzureContext = _context.UserForOrder.Include(u => u.Aspnetuser).Include(u => u.Order);
+            return View(await nassRedoAzureContext.ToListAsync());
         }
 
         // GET: UserForOrders/Details/

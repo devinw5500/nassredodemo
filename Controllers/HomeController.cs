@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using TaxSystemNASS.Models;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+
 using TaxSystemNASS.Models;
 
 namespace TaxSystemNASS.Controllers
@@ -12,9 +14,9 @@ namespace TaxSystemNASS.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public HomeController(ILogger<HomeController> logger, Nass_Redo_AzureContext context)
+        public HomeController(ILogger<HomeController> logger, NassRedoAzureContext context)
         {
             _logger = logger;
             _context = context;
@@ -22,36 +24,54 @@ namespace TaxSystemNASS.Controllers
 
         public IActionResult Index()
         {
+            Debug.WriteLine("id: " + User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value);
+            if (User.IsInRole("Tech"))
+            {
+                TechHome();
+                return View("TechHome");
+            }
+            if (User.IsInRole("Admin"))
+            {
+                AdminHome();
+                return View("AdminHome");
+            }
+            if (User.IsInRole("Client"))
+            {
+                ClientHome();
+                return View("ClientHome");
+            }
+            if (User.IsInRole("Employee"))
+            {
+                EmployeeHome();
+                return View("EmployeeHome");
+            }
             return View();
         }
 
-        [Authorize]
-        public IActionResult PlaceOrder()
+        public IActionResult TechHome()
         {
             return View();
         }
 
-        //TODO: add sql queries refi
-        public IActionResult PlaceRefi()
+        public IActionResult AdminHome()
         {
             return View();
         }
 
-        //TODO: add sql queries purchase
-        public IActionResult PlacePurchase()
+        public IActionResult ClientHome()
         {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}'").ToList();
+            ViewBag.Orders = orders;
+
             return View();
         }
 
-        public async Task<IActionResult> OrderQueue()
+        public IActionResult EmployeeHome()
         {
-            return View(await _context.Order.ToListAsync());
-        }
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}'").ToList();
+            ViewBag.Orders = orders;
 
-        public async Task<IActionResult> OrderDetails()
-        {
-            //TODO: Viewbag to allow multiple models for each view? https://www.c-sharpcorner.com/UploadFile/ff2f08/multiple-models-in-single-view-in-mvc/ (number 4)
-            return View(await _context.Order.ToListAsync());
+            return View();
         }
 
         public IActionResult Privacy()

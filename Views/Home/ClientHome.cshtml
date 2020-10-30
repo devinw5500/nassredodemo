@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="alert-danger" style="padding-bottom:0">BETA</h1>
+    <small>This site is a WIP! Find any issues or have a suggestion? Please email tech@nasstitle.com</small>
+    <h4 class="display-4">Tax Product Order System</h4>
+
+    <div class="jumbotron jumbotron-fluid rounded-top" style="margin-bottom:0rem; padding: 2rem 2rem;">
+        <p class="h1">Client Portal</p>
+    </div>
+    <div class="jumbotron jumbotron-fluid bg-light">
+
+        <h4>ACTION NEEDED Orders:</h4>
+        <hr />
+        <div style="overflow-y: auto; height: 100px; ">
+            <table style="margin-left:14em;">
+                <tr>
+                    <th>Order ID</th>
+                    <th style="padding-left: 2em;">Type</th>
+                    <th style="padding-left: 2em;">Placed</th>
+                    <th style="padding-left: 2em;">ETA</th>
+                    <th style="padding-left: 2em;">Actions</th>
+                </tr>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    @if (order.Status.Equals("ACTION NEEDED"))
+                    {
+                        <tr>
+                            <td>@order.OrderGuid</td>
+                            <td style="padding-left: 2em;">@order.Type</td>
+                            <td style="padding-left: 2em;">@order.OrderPlaced</td>
+                            <td style="padding-left: 2em;">@order.OrderEta</td>
+                            <td style="padding-left: 2em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@order.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+
+        <h4>Your In Progress Orders:</h4>
+        <hr />
+        <div style="overflow-y: auto; height: 100px; ">
+            <table style="margin-left:14em;">
+                <tr>
+                    <th>Order ID</th>
+                    <th style="padding-left: 2em;">Type</th>
+                    <th style="padding-left: 2em;">Placed</th>
+                    <th style="padding-left: 2em;">ETA</th>
+                    <th style="padding-left: 2em;">Actions</th>
+                </tr>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    @if (order.Status.Equals("WIP"))
+                    {
+                        <tr>
+                            <td>@order.OrderGuid</td>
+                            <td style="padding-left: 2em;">@order.Type</td>
+                            <td style="padding-left: 2em;">@order.OrderPlaced</td>
+                            <td style="padding-left: 2em;">@order.OrderEta</td>
+                            <td style="padding-left: 2em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@order.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+
+        <h4>Not Started Orders:</h4>
+        <div style="overflow-y: auto; height: 100px;">
+            <table style="margin-left:14em;">
+                <tr>
+                    <th>Order ID</th>
+                    <th style="padding-left: 2em;">Type</th>
+                    <th style="padding-left: 2em;">Placed</th>
+                    <th style="padding-left: 2em;">ETA</th>
+                    <th style="padding-left: 2em;">Actions</th>
+                </tr>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    @if (order.Status.Equals("Not Started"))
+                    {
+                        <tr>
+                            <td>@order.OrderGuid</td>
+                            <td style="padding-left: 2em;">@order.Type</td>
+                            <td style="padding-left: 2em;">@order.OrderPlaced</td>
+                            <td style="padding-left: 2em;">@order.OrderEta</td>
+                            <td style="padding-left: 2em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@order.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+
+        <h4>Your Completed Orders:</h4>
+        <div style="overflow-y: auto; height: 100px;">
+            <table style="margin-left:14em;">
+                <tr>
+                    <th>Order ID</th>
+                    <th style="padding-left: 2em;">Type</th>
+                    <th style="padding-left: 2em;">Placed</th>
+                    <th style="padding-left: 2em;">ETA</th>
+                    <th style="padding-left: 2em;">Actions</th>
+                </tr>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    @if (order.Status.Equals("Complete"))
+                    {
+                        <tr>
+                            <td>@order.OrderGuid</td>
+                            <td style="padding-left: 2em;">@order.Type</td>
+                            <td style="padding-left: 2em;">@order.OrderPlaced</td>
+                            <td style="padding-left: 2em;">@order.OrderEta</td>
+                            <td style="padding-left: 2em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@order.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+
+        <a class="btn btn-primary" asp-controller="PlaceOrders" asp-action="PlaceRefi">Place Refi Order</a>
+        <a class="btn btn-primary" asp-controller="PlaceOrders" asp-action="PlacePurchase">Place Purchase Order</a>
+    </div>
+
+    <p>Click here to <a asp-controller="PlaceOrders" asp-action="Index">place an order</a>.</p>
+    <p>Click here to <a asp-controller="OrderDetails" asp-action="Index">view the list of orders</a>.</p>
+    <p>Click here to <a asp-controller="OrderDetails" asp-action="CompletedOrders">view the list of completed orders</a>.</p>
+</div>

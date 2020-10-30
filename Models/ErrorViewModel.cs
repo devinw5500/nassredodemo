@@ -1,5 +1,3 @@
-using System;
-
 namespace TaxSystemNASS.Models
 {
     public class ErrorViewModel

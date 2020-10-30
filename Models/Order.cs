@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace TaxSystemNASS.Models
 {
@@ -38,14 +37,5 @@ namespace TaxSystemNASS.Models
 
         public virtual ICollection<ProductInOrder> ProductInOrder { get; set; }
         public virtual ICollection<UserForOrder> UserForOrder { get; set; }
-
-        public string ToSqlStatement()
-        {
-            StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[Order] VALUES (");
-
-            sqlInsertAddress.AppendFormat(@"'{0}', '{1}','{2}','{3}','{4}','{5}')", OrderId, OrderGuid, Status, TotalCost, OrderPlaced, OrderEta);
-
-            return sqlInsertAddress.ToString();
-        }
     }
 }

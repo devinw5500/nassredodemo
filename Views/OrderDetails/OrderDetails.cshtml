@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
+<p><br /></p>
+<div>
+    <a asp-action="Index">Back to  List</a>
+</div>
 
 <div>
     <h4>Order</h4>
@@ -42,16 +44,17 @@
         </dd>
     </dl>
     <div>
-        <a asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderId">Edit Order</a> 
+        <a asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderId">Edit Order</a>
     </div>
     <br />
     <h4>People</h4>
+    <hr />
     <table>
         <tr>
             <th>Full Name</th>
             <th style="padding-left:1em;">DOB</th>
             <th style="padding-left:1em;">Contact Info</th>
-            <th style="padding-left:1em;">Type</th>
+            <th style="padding-left:5em;">Type</th>
             <th style="padding-left:5em;">Actions</th>
         </tr>
         @foreach (PersonalInfo person in ViewBag.People)
@@ -73,7 +76,7 @@
                 }
                 <td style="padding-left:5em;">
                     <a asp-controller="PersonalInfoes" asp-action="Edit" asp-route-id="@person.PersonalInfoId">Edit Person</a> |
-                    <a asp-controller="PersonalInfoes" asp-action="Details" asp-route-id="@person.PersonalInfoId">View Sensitive Data</a> 
+                    <a asp-controller="PersonalInfoes" asp-action="Details" asp-route-id="@person.PersonalInfoId">View Sensitive Data</a>
                 </td>
             </tr>
 
@@ -81,9 +84,10 @@
     </table>
     <br />
     <h4>Addresses</h4>
+    <hr />
     <table>
         <tr>
-            <th style="padding-left:2em;">Address Line 1</th>
+            <th>Address Line 1</th>
             <th style="padding-left:2em;">Address Line 2</th>
             <th style="padding-left:2em;">City</th>
             <th style="padding-left:2em;">County</th>
@@ -96,7 +100,7 @@
         @foreach (Address addr in ViewBag.Address)
         {
             <tr>
-                <td style="padding-left:2em;">@addr.AddressLine1</td>
+                <td>@addr.AddressLine1</td>
                 <td style="padding-left:2em;">@addr.AddressLine2</td>
                 <td style="padding-left:2em;">@addr.City</td>
                 <td style="padding-left:2em;">@addr.County</td>
@@ -114,15 +118,46 @@
             </tr>
         }
     </table>
+
     <br />
     <h4>Product Purchased</h4>
+    <hr />
     @foreach (Product product in ViewBag.Product)
     {
         <p>Name: @product.Name</p>
         <p>Description: @product.Description</p>
     }
-    <p></p>
+    <p><br /></p>
+
+    <h4>Related Files</h4>
+    <hr />
+    <p> <mark class="alert-danger">Not Implemented</mark></p>
+    <p><br /></p>
+
+    <h4>Users Related to Order</h4>
+    <hr />
+    <table>
+        <tr>
+            <th>Email</th>
+            <th style="padding-left:2em;">Type</th>
+        </tr>
+        @foreach (UserForOrder user in ViewBag.Users)
+        {
+            <tr>
+                <td>@user.AspnetuserId</td>
+                <td style="padding-left:2em;">@user.Type</td">
+            </tr>
+        }
+    </table>
+    <p><br /></p>
+
+    @if (User.IsInRole("Employee"))
+    {
+        <p>Are you working on this order? Click the button below to assign yourself to this.</p>
+        <a class="btn btn-primary" asp-action="ClaimOrder" asp-route-id="@Model.OrderId">Working on this</a>
+    }
 </div>
+<p><br /></p>
 <div>
     <a asp-action="Index">Back to  List</a>
 </div>

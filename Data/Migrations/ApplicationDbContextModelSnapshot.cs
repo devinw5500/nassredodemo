@@ -8,7 +8,7 @@ using TaxSystemNASS.Models;
 
 namespace TaxSystemNASS.Data.Migrations
 {
-    [DbContext(typeof(Nass_Redo_AzureContext))]
+    [DbContext(typeof(NassRedoAzureContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

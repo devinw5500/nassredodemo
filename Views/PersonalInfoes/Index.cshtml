@@ -43,41 +43,42 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonalInfoGuid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiddleInitial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HashedSsn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PersonalInfoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PersonalInfoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PersonalInfoId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonalInfoGuid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MiddleInitial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dob)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HashedSsn)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PersonalInfoId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PersonalInfoId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PersonalInfoId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

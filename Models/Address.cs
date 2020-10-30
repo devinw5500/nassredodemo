@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace TaxSystemNASS.Models
 {
@@ -20,14 +19,5 @@ namespace TaxSystemNASS.Models
         public string ParcelId { get; set; } = null;
 
         public virtual ICollection<AddressInOrder> AddressInOrder { get; set; }
-
-        public string toSqlStatement()
-        {
-            StringBuilder sqlInsertAddress = new StringBuilder("INSERT INTO [dbo].[Address]([AddressLine1],[AddressLine2],[StateAbbr],[City],[County],[ZIP],[ParcelID]) VALUES (");
-
-            sqlInsertAddress.AppendFormat(@"'{0}', '{1}','{2}','{3}','{4}','{5}','{6}')", AddressLine1, AddressLine2, StateAbbr, City, County, Zip, ParcelId);
-
-            return sqlInsertAddress.ToString();
-        }
     }
 }

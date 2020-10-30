@@ -9,9 +9,9 @@ namespace TaxSystemNASS.Controllers
 {
     public class ProductInOrdersController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public ProductInOrdersController(Nass_Redo_AzureContext context)
+        public ProductInOrdersController(NassRedoAzureContext context)
         {
             _context = context;
         }

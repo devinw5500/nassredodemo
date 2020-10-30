@@ -25,7 +25,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <select asp-for="Status" class="form-control">
+                    <option value="Not Started">Not Started</option>
+                    <option value="WIP">WIP</option>
+                    <option value="ACTION NEEDED">ACTION NEEDED</option>
+                    <option value="Completed">Completed</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,7 +56,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="OrderDetails" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

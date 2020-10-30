@@ -1,16 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TaxSystemNASS.Models;
 
 namespace TaxSystemNASS.Controllers
 {
     public class PersonalInfoesController : Controller
     {
-        private readonly Nass_Redo_AzureContext _context;
+        private readonly NassRedoAzureContext _context;
 
-        public PersonalInfoesController(Nass_Redo_AzureContext context)
+        public PersonalInfoesController(NassRedoAzureContext context)
         {
             _context = context;
         }
