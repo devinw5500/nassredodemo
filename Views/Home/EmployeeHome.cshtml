@@ -12,11 +12,25 @@
     </div>
     <div class="jumbotron jumbotron-fluid bg-light">
 
-        <h4>Your In Progress Orders:</h4>
+        <div class="progress" aria-valuemax="@ViewBag.TotalNum">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: @ViewBag.NSNum%" aria-valuenow="@ViewBag.NSNum" aria-valuemin="0" aria-valuemax="100">Not Started</div>
+            <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.WIPNum%" aria-valuenow="@ViewBag.WIPNum" aria-valuemin="0" aria-valuemax="100">WIP</div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: @ViewBag.ANNum%" aria-valuenow="@ViewBag.ANNum" aria-valuemin="0" aria-valuemax="100">Action Needed</div>
+        </div>
+        <br />
+
+        <h4>ACTION NEEDED Orders:</h4>
         <hr />
-        <div style="overflow-y: auto; height: 100px; ">
-            <table style="margin-left:14em;">
-                <tr>
+        <div class="col text-right">
+            <button id="ANHide" class="btn btn-light">
+                <span id="ANSpan" class="material-icons">
+                    expand_less
+                </span>
+            </button>
+        </div>
+        <div id="ANDiv" style="overflow-y: auto; height: 300px; ">
+            <table class="table table-hover hide">
+                <tr class="table-danger">
                     <th>Order ID</th>
                     <th style="padding-left: 2em;">Type</th>
                     <th style="padding-left: 2em;">Placed</th>
@@ -25,7 +39,45 @@
                 </tr>
                 @foreach (Order order in ViewBag.Orders)
                 {
-                    @if (order.Status.Equals("WIP") || order.Status.Equals("ACTION NEEDED"))
+                    @if (order.Status.Equals("ACTION NEEDED"))
+                    {
+                        <tr>
+                            <td>@order.OrderGuid</td>
+                            <td style="padding-left: 2em;">@order.Type</td>
+                            <td style="padding-left: 2em;">@order.OrderPlaced</td>
+                            <td style="padding-left: 2em;">@order.OrderEta</td>
+                            <td style="padding-left: 2em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@order.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+        <br />
+        <br />
+
+        <h4>Your In Progress Orders:</h4>
+        <hr />
+        <div class="col text-right">
+            <button id="IPHide" class="btn btn-light">
+                <span id="IPSpan" class="material-icons">
+                    expand_less
+                </span>
+            </button>
+        </div>
+        <div id="IPDiv" style="overflow-y: auto; height: 300px; ">
+            <table class="table table-hover">
+                <tr class="table-info">
+                    <th>Order ID</th>
+                    <th style="padding-left: 2em;">Type</th>
+                    <th style="padding-left: 2em;">Placed</th>
+                    <th style="padding-left: 2em;">ETA</th>
+                    <th style="padding-left: 2em;">Actions</th>
+                </tr>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    @if (order.Status.Equals("WIP"))
                     {
                         <tr>
                             <td>@order.OrderGuid</td>
@@ -45,9 +97,16 @@
 
         <h4>Not Started Orders:</h4>
         <hr />
-        <div style="overflow-y: auto; height: 100px;">
-            <table style="margin-left:14em;">
-                <tr>
+        <div class="col text-right">
+            <button id="NSHide" class="btn btn-light">
+                <span id="NSSpan" class="material-icons">
+                    expand_more
+                </span>
+            </button>
+        </div>
+        <div id="NSDiv" style="overflow-y: auto; height: 300px;">
+            <table class="table table-hover">
+                <tr class="table-warning">
                     <th>Order ID</th>
                     <th style="padding-left: 2em;">Type</th>
                     <th style="padding-left: 2em;">Placed</th>
@@ -75,10 +134,17 @@
         <br />
 
         <h4>Your Completed Orders:</h4>
-	<hr />
-        <div style="overflow-y: auto; height: 100px;">
-            <table style="margin-left:14em;">
-                <tr>
+        <hr />
+        <div class="col text-right">
+            <button id="YCHide" class="btn btn-light">
+                <span id="YCSpan" class="material-icons">
+                    expand_more
+                </span>
+            </button>
+        </div>
+        <div id="YCDiv" style="overflow-y: auto; height: 200px;">
+            <table class="table table-hover">
+                <tr class="table-success">
                     <th>Order ID</th>
                     <th style="padding-left: 2em;">Type</th>
                     <th style="padding-left: 2em;">Placed</th>
@@ -113,3 +179,70 @@
     <p>Click here to <a asp-controller="OrderDetails" asp-action="Index">view the list of orders</a>.</p>
     <p>Click here to <a asp-controller="OrderDetails" asp-action="CompletedOrders">view the list of completed orders</a>.</p>
 </div>
+
+<script>
+    var anhide = document.getElementById("ANHide");
+    var anspan = document.getElementById("ANSpan");
+    var andiv = document.getElementById("ANDiv");
+    var ancount = 0;
+    var iphide = document.getElementById("IPHide");
+    var ipspan = document.getElementById("IPSpan");
+    var ipdiv = document.getElementById("IPDiv");
+    var ipcount = 0;
+    var nshide = document.getElementById("NSHide");
+    var nsspan = document.getElementById("NSSpan");
+    var nsdiv = document.getElementById("NSDiv");
+    var nscount = 0;
+    var ychide = document.getElementById("YCHide");
+    var ycspan = document.getElementById("YCSpan");
+    var ycdiv = document.getElementById("YCDiv");
+    var yccount = 0;
+
+    anhide.addEventListener("click", function () {
+        if (ancount === 0) {
+            anspan.textContent = "expand_more";
+            andiv.hidden = true;
+            ancount = 1;
+        } else if (ancount === 1) {
+            anspan.textContent = "expand_less";
+            andiv.hidden = false;
+            ancount = 0;
+        }
+    })
+
+    iphide.addEventListener("click", function () {
+        if (ipcount === 0) {
+            ipspan.textContent = "expand_more";
+            ipdiv.hidden = true;
+            ipcount = 1;
+        } else if (ipcount === 1) {
+            ipspan.textContent = "expand_less";
+            ipdiv.hidden = false;
+            ipcount = 0;
+        }
+    })
+
+    nshide.addEventListener("click", function () {
+        if (nscount === 0) {
+            nsspan.textContent = "expand_more";
+            nsdiv.hidden = true;
+            nscount = 1;
+        } else if (nscount === 1) {
+            nsspan.textContent = "expand_less";
+            nsdiv.hidden = false;
+            nscount = 0;
+        }
+    })
+
+    ychide.addEventListener("click", function () {
+        if (yccount === 0) {
+            ycspan.textContent = "expand_more";
+            ycdiv.hidden = true;
+            yccount = 1;
+        } else if (yccount === 1) {
+            ycspan.textContent = "expand_less";
+            ycdiv.hidden = false;
+            yccount = 0;
+        }
+    })
+</script>

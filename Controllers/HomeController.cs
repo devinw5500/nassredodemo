@@ -60,18 +60,58 @@ namespace TaxSystemNASS.Controllers
 
         public IActionResult ClientHome()
         {
-            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}'").ToList();
-            ViewBag.Orders = orders;
+            double total = (WIPNumber()) + (NotStartedNumber()) + (ActionNeededNumber());
+            double wip = ((WIPNumber()) / total) * 100;
+            double ns = ((NotStartedNumber()) / total) * 100;
+            double an = ((ActionNeededNumber()) / total) * 100;
 
+            ViewBag.Orders = sqlCall();
+            ViewBag.WIPNum = wip;
+            ViewBag.NSNum = ns;
+            ViewBag.ANNum = an;
             return View();
         }
 
         public IActionResult EmployeeHome()
         {
-            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}'").ToList();
-            ViewBag.Orders = orders;
+            double total = (WIPNumber()) + (NotStartedNumber()) + (ActionNeededNumber());
+            double wip = ((WIPNumber()) / total) * 100;
+            double ns = ((NotStartedNumber()) / total) * 100;
+            double an = ((ActionNeededNumber()) / total) * 100;
 
+            ViewBag.Orders = sqlCall();
+            ViewBag.WIPNum = wip;
+            ViewBag.NSNum = ns;
+            ViewBag.ANNum = an;
             return View();
+        }
+
+        public System.Collections.Generic.List<Order> sqlCall()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}'").ToList();
+
+            return orders;
+        }
+
+        public int WIPNumber()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'WIP'").ToList();
+            int size = orders.Count();
+            return size;
+        }
+
+        public int NotStartedNumber()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'Not Started'").ToList();
+            int size = orders.Count();
+            return size;
+        }
+
+        public int ActionNeededNumber()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'ACTION NEEDED'").ToList();
+            int size = orders.Count();
+            return size;
         }
 
         public IActionResult Privacy()
