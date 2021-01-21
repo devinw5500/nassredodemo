@@ -36,10 +36,10 @@
     <tbody>
         @foreach (var item in Model)
         {
-            @if (item.Status.Equals("Complete"))
+            @if (item.Status.Equals("Completed"))
             {
                 <tr>
-                    <td >
+                    <td>
                         @Html.DisplayFor(modelItem => item.OrderGuid)
                     </td>
                     <td>

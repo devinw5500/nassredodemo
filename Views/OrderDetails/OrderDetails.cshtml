@@ -5,7 +5,7 @@
 }
 <p><br /></p>
 <div>
-    <a asp-action="Index">Back to  List</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 <div>
@@ -42,122 +42,493 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.OrderEta)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CompletedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CompletedDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ConfirmedDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ConfirmedDate)
+        </dd>
     </dl>
     <div>
         <a asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderId">Edit Order</a>
     </div>
     <br />
-    <h4>People</h4>
-    <hr />
-    <table>
-        <tr>
-            <th>Full Name</th>
-            <th style="padding-left:1em;">DOB</th>
-            <th style="padding-left:1em;">Contact Info</th>
-            <th style="padding-left:5em;">Type</th>
-            <th style="padding-left:5em;">Actions</th>
-        </tr>
-        @foreach (PersonalInfo person in ViewBag.People)
-        {
+    <button type="button" class="btn btn-primary" id="detailsbtn">Details</button>
+    <button type="button" class="btn btn-primary" id="usersbtn">Users and Comments</button>
+    <button type="button" class="btn btn-primary" id="filesbtn">Related Files and Orders</button>
+    <button type="button" class="btn btn-primary" id="actionsbtn">Actions</button>
+
+    <div id="detailsdiv">
+        <br />
+        <h4>People</h4>
+        <hr />
+        <table>
             <tr>
-                <td>@person.FirstName @person.MiddleInitial @person.LastName</td>
-                <td style="padding-left:1em;">@person.Dob</td>
-                <td style="padding-left:1em;">
-                    Email: @person.Email <br />
-                    Phone: @person.Phone <br />
-                    Fax: @person.Fax
-                </td>
-                @foreach (PersonInOrder type in ViewBag.PeopleType)
-                {
-                    @if (type.PersonId == person.PersonalInfoId)
+                <th>Full Name</th>
+                <th style="padding-left:1em;">DOB</th>
+                <th style="padding-left:1em;">Contact Info</th>
+                <th style="padding-left:5em;">Type</th>
+                <th style="padding-left:5em;">Actions</th>
+            </tr>
+            @foreach (PersonalInfo person in ViewBag.People)
+            {
+                <tr>
+                    <td>@person.FirstName @person.MiddleInitial @person.LastName</td>
+                    <td style="padding-left:1em;">@person.Dob</td>
+                    <td style="padding-left:1em;">
+                        Email: @person.Email <br />
+                        Phone: @person.Phone <br />
+                        Fax: @person.Fax
+                    </td>
+                    @foreach (PersonInOrder type in ViewBag.PeopleType)
                     {
-                        <td style="padding-left:5em;">@type.Type</td>
+                        @if (type.PersonId == person.PersonalInfoId)
+                        {
+                            <td style="padding-left:5em;">@type.Type</td>
+                        }
                     }
-                }
-                <td style="padding-left:5em;">
-                    <a asp-controller="PersonalInfoes" asp-action="Edit" asp-route-id="@person.PersonalInfoId">Edit Person</a> |
-                    <a asp-controller="PersonalInfoes" asp-action="Details" asp-route-id="@person.PersonalInfoId">View Sensitive Data</a>
-                </td>
-            </tr>
+                    <td style="padding-left:5em;">
+                        <a asp-controller="PersonalInfoes" asp-action="Edit" asp-route-id="@person.PersonalInfoId">Edit Person</a> |
+                        <a asp-controller="PersonalInfoes" asp-action="Details" asp-route-id="@person.PersonalInfoId">View Sensitive Data</a>
+                    </td>
+                </tr>
 
-        }
-    </table>
-    <br />
-    <h4>Addresses</h4>
-    <hr />
-    <table>
-        <tr>
-            <th>Address Line 1</th>
-            <th style="padding-left:2em;">Address Line 2</th>
-            <th style="padding-left:2em;">City</th>
-            <th style="padding-left:2em;">County</th>
-            <th style="padding-left:2em;">ZIP</th>
-            <th style="padding-left:2em;">State</th>
-            <th style="padding-left:2em;">Parcel ID</th>
-            <th style="padding-left:2em;">Type</th>
-            <th style="padding-left:2em;">Action</th>
-        </tr>
-        @foreach (Address addr in ViewBag.Address)
-        {
+            }
+        </table>
+        <br />
+        <input type="button" class="btn btn-primary" value="Add New Person" id="OpenPersForm" />
+        <div class="container-fluid" id="persform">
+            <form method="post" asp-action="AddPerson" asp-route-id="@Model.OrderId">
+                <div class="form-row">
+                    <div class="col">
+                        <label class="lbl" for="AddFName">Owner's First Name</label>
+                        <input type="text" class="form-control" id="AddFName" name="AddFName" value="@ViewData["AddFName"]" placeholder="First Name" />
+                    </div>
+                    <div class="col-3">
+                        <label class="lbl" for="AddMI">Owner's Middle Initial</label>
+                        <input type="text" class="form-control" id="AddMI" name="AddMI" value="@ViewData["AddMI"]" placeholder="MI" />
+                    </div>
+                    <div class="col">
+                        <label class="lbl" for="AddLName">Owner's Last Name</label>
+                        <input type="text" class="form-control" id="AddLName" name="AddLName" value="@ViewData["AddLName"]" placeholder="Last Name" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-4">
+                        <label class="lbl" for="AddDOB">Owner's Date of Birth</label>
+                        <input type="date" class="form-control" id="AddDOB" name="AddDOB" value="@ViewData["AddDOB"]" />
+                    </div>
+                    <div class="col-8">
+                        <label class="lbl" for="AddSSN">Owner's Social Security Number</label>
+                        <input type="text" class="form-control" id="AddSSN" name="AddSSN" value="@ViewData["AddSSN"]" placeholder="SSN - Optional*" />
+                        <small class="text-muted">*Not supplying SSN may prevent the order from being completed until it is supplied. You can add this later if needed.</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <h4 class="text-info">Contact Information</h4>
+                    <small>Please enter at least one field.</small>
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        <label class="lbl" for="AddEmail">Email</label>
+                        <input type="text" class="form-control" id="AddEmail" name="AddEmail" value="@ViewData["AddEmail"]" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-4">
+                        <label class="lbl" for="AddPhone">Phone</label>
+                        <input type="text" class="form-control" id="AddPhone" name="AddPhone" value="@ViewData["AddPhone"]" placeholder="Phone" />
+                        <small class="text-muted">Optional</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-4">
+                        <label class="lbl" for="AddFax">Fax</label>
+                        <input type="text" class="form-control" id="AddFax" name="AddFax" value="@ViewData["AddFax"]" placeholder="Fax" />
+                        <small class="text-muted">Optional</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label class="lbl" for="AddType">Type</label>
+                        <select type="text" class="form-control" id="AddType" name="AddType" value="@ViewData["AddType"]">
+                            <option value="Other">Select Type</option>
+                            <option value="Forwarding">Buyer</option>
+                            <option value="Property">Seller</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top:1rem;">
+                    <input type="submit" value="Add Person" id="submitbtn" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+        <br />
+        <h4>Addresses</h4>
+        <hr />
+        <table>
             <tr>
-                <td>@addr.AddressLine1</td>
-                <td style="padding-left:2em;">@addr.AddressLine2</td>
-                <td style="padding-left:2em;">@addr.City</td>
-                <td style="padding-left:2em;">@addr.County</td>
-                <td style="padding-left:2em;">@addr.Zip</td>
-                <td style="padding-left:2em;">@addr.StateAbbr</td>
-                <td style="padding-left:2em;">@addr.ParcelId</td>
-                @foreach (AddressInOrder type in ViewBag.AddressType)
-                {
-                    @if (type.AddressId == addr.AddressId)
+                <th>Address Line 1</th>
+                <th style="padding-left:2em;">Address Line 2</th>
+                <th style="padding-left:2em;">City</th>
+                <th style="padding-left:2em;">County</th>
+                <th style="padding-left:2em;">ZIP</th>
+                <th style="padding-left:2em;">State</th>
+                <th style="padding-left:2em;">Parcel ID</th>
+                <th style="padding-left:2em;">Type</th>
+                <th style="padding-left:2em;">Action</th>
+            </tr>
+            @foreach (Address addr in ViewBag.Address)
+            {
+                <tr>
+                    <td>@addr.AddressLine1</td>
+                    <td style="padding-left:2em;">@addr.AddressLine2</td>
+                    <td style="padding-left:2em;">@addr.City</td>
+                    <td style="padding-left:2em;">@addr.County</td>
+                    <td style="padding-left:2em;">@addr.Zip</td>
+                    <td style="padding-left:2em;">@addr.StateAbbr</td>
+                    <td style="padding-left:2em;">@addr.ParcelId</td>
+                    @foreach (AddressInOrder type in ViewBag.AddressType)
                     {
-                        <td style="padding-left:2em;">@type.Type</td>
+                        @if (type.AddressId == addr.AddressId)
+                        {
+                            <td style="padding-left:2em;">@type.Type</td>
+                        }
                     }
-                }
-                <td style="padding-left:2em;"><a asp-controller="Addresses" asp-action="Edit" asp-route-id="@addr.AddressId">Edit Address</a></td>
-            </tr>
-        }
-    </table>
-
-    <br />
-    <h4>Product Purchased</h4>
-    <hr />
-    @foreach (Product product in ViewBag.Product)
-    {
-        <p>Name: @product.Name</p>
-        <p>Description: @product.Description</p>
-    }
-    <p><br /></p>
-
-    <h4>Related Files</h4>
-    <hr />
-    <p> <mark class="alert-danger">Not Implemented</mark></p>
-    <p><br /></p>
-
-    <h4>Users Related to Order</h4>
-    <hr />
-    <table>
-        <tr>
-            <th>Email</th>
-            <th style="padding-left:2em;">Type</th>
-        </tr>
-        @foreach (UserForOrder user in ViewBag.Users)
+                    <td style="padding-left:2em;"><a asp-controller="Addresses" asp-action="Edit" asp-route-id="@addr.AddressId">Edit Address</a></td>
+                </tr>
+            }
+        </table>
+        <br />
+        <input type="button" class="btn btn-primary" value="Add New Address" id="OpenAddrForm" />
+        <div class="container-fluid" id="addrform">
+            <form method="post" asp-action="AddAddress" asp-route-id="@Model.OrderId">
+                <div class="form-row">
+                    <div class="col">
+                        <label class="lbl" for="AddAddrLn1">Address Line 1</label>
+                        <input type="text" class="form-control" id="AddAddrLn1" name="AddAddrLn1" value="@ViewData["AddAddrLn1"]" placeholder="Address Line 1" />
+                    </div>
+                    <div class="col">
+                        <label class="lbl" for="AddAddrLn2">Address Line 2</label>
+                        <input type="text" class="form-control" id="AddAddrLn2" name="AddAddrLn2" value="@ViewData["AddAddrLn2"]" placeholder="Address Line 2" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-2">
+                        <label class="lbl" for="AddState">State</label>
+                        <input type="text" class="form-control" id="AddState" name="AddState" value="@ViewData["AddState"]" placeholder="State" />
+                    </div>
+                    <div class="col-3">
+                        <label class="lbl" for="AddZip">ZIP</label>
+                        <input type="text" class="form-control" id="AddZip" name="AddZip" value="@ViewData["AddZip"]" placeholder="ZIP" />
+                    </div>
+                    <div class="col">
+                        <label class="lbl" for="AddCounty">County</label>
+                        <input type="text" class="form-control" id="AddCounty" name="AddCounty" value="@ViewData["AddCounty"]" placeholder="County - If Needed*" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label class="lbl" for="AddCity">City</label>
+                        <input type="text" class="form-control" id="AddCity" name="AddCity" value="@ViewData["AddCity"]" placeholder="City" />
+                    </div>
+                    <div class="col">
+                        <label class="lbl" for="AddParcel">Parcel ID Number</label>
+                        <input type="text" class="form-control" id="AddParcel" name="AddParcel" value="@ViewData["AddParcel"]" placeholder="Parcel ID - If Needed" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label class="lbl" for="AddAssessed">Assessed Amount</label>
+                        <input type="text" class="form-control" id="AddAssessed" name="AddAssessed" value="@ViewData["AddAssessed"]" placeholder="Assessed Amount - If Needed" />
+                        <small>Assessed Amount will help us get an estimate for your taxes</small>
+                    </div>
+                    <div class="col">
+                        <label class="lbl" for="AddType">Type</label>
+                        <select type="text" class="form-control" id="AddType" name="AddType" value="@ViewData["AddType"]">
+                            <option value="Other">Select Type</option>
+                            <option value="Forwarding">Forwarding</option>
+                            <option value="Property">Property Sold</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top:1rem;">
+                    <input type="submit" value="Add Address" id="submitbtn" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+        <br />
+        <br />
+        <h4>Product Purchased</h4>
+        <hr />
+        @foreach (Product product in ViewBag.Product)
         {
-            <tr>
-                <td>@user.AspnetuserId</td>
-                <td style="padding-left:2em;">@user.Type</td">
-            </tr>
+            <p>Name: @product.Name</p>
+            <p>Description: @product.Description</p>
         }
-    </table>
-    <p><br /></p>
+        <br />
+    </div>
 
-    @if (User.IsInRole("Employee"))
-    {
-        <p>Are you working on this order? Click the button below to assign yourself to this.</p>
-        <a class="btn btn-primary" asp-action="ClaimOrder" asp-route-id="@Model.OrderId">Working on this</a>
-    }
+    <div id="usersdiv">
+        <h4>Users Related to Order</h4>
+        <hr />
+        <table>
+            <tr>
+                <th>Email</th>
+                <th style="padding-left:2em;">Type</th>
+            </tr>
+            @{
+                var you = false;
+            }
+            @foreach (UserForOrder user in ViewBag.Users)
+            {
+                @if (user.AspnetuserId == User.Identity.Name)
+                {
+                    <tr>
+                        <td style="color:forestgreen;">@user.AspnetuserId</td>
+                        <td style="padding-left:2em; color:forestgreen;">@user.Type</td>
+                    </tr>
+
+                    you = true;
+                }
+                else
+                {
+                    <tr>
+                        <td>@user.AspnetuserId</td>
+                        <td style="padding-left:2em;">@user.Type</td>
+                    </tr>
+                }
+
+            }
+        </table>
+        <br />
+
+        @if (User.IsInRole("Employee") && !you)
+        {
+            <p>Are you working on this order? Click the button below to assign yourself to this.</p>
+            <a class="btn btn-primary" asp-action="ClaimOrder" asp-route-id="@Model.OrderId">Working on this</a>
+        }
+        <p><br /></p>
+        <p><br /></p>
+        <h4>Comments and Notes</h4>
+        <hr />
+        <table>
+            <tr>
+                <th>Comment</th>
+                <th style="padding-left:2em;">Urgent</th>
+                <th style="padding-left:2em;">User</th>
+                <th style="padding-left:2em;">Date</th>
+            </tr>
+            @foreach (OrderComment comment in ViewBag.Comments)
+            {
+                @if (comment.Urgent == true)
+                {
+                    <tr>
+                        @if (comment.Comment.Contains("@" + User.Identity.Name))
+                        {
+
+                            <td style="color:green">@comment.Comment</td>
+                        }
+                        else
+                        {
+
+                            <td>@comment.Comment</td>
+                        }
+                        <td style="padding-left:2em; color:darkred"><span>&#10003;</span></td>
+                        <td style="padding-left:2em;">@comment.UserSubmitted</td>
+                        <td style="padding-left:2em;">@comment.Date</td>
+                    </tr>
+                }
+                @if (comment.Urgent == false)
+                {
+                    <tr>
+                        @if (comment.Comment.Contains("@" + User.Identity.Name))
+                        {
+
+                            <td style="color:green">@comment.Comment</td>
+                        }
+                        else
+                        {
+
+                            <td>@comment.Comment</td>
+                        }
+                        <td style="padding-left:2em;">X</td>
+                        <td style="padding-left:2em;">@comment.UserSubmitted</td>
+                        <td style="padding-left:2em;">@comment.Date</td>
+                    </tr>
+                }
+            }
+        </table>
+        <h4>Add comment</h4>
+        <hr />
+        <div class="container-fluid">
+            <form method="post" asp-action="MakeComment" asp-route-id="@Model.OrderId">
+                <div class="form-row">
+                    <textarea type="text" class="form-control" id="commentdesc" name="commentdesc" value="@ViewData["commentdesc"]" placeholder="Comment"></textarea>
+                </div>
+                <div class="form-row">
+                    <input class="form-check-input" style="margin-left: 0rem;" type="checkbox" id="urgentcheck" name="urgentcheck" value="true" checked="@ViewData["urgentcheck"]">
+                    <label class="form-check-label" style="margin-left: 1.25rem;" for="urgentcheck">
+                        Urgent
+                    </label>
+                </div>
+                <div class="form-row" style="margin-top:1rem;">
+                    <input type="submit" value="Submit Comment" id="submitbtn" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="filesdiv">
+        <br />
+        <h4>Related Files</h4>
+        <hr />
+        <p> <mark class="alert-danger">Not Implemented</mark></p>
+        <br />
+        <br />
+        <h4>Related Orders</h4>
+        <hr />
+        <p> <mark class="alert-danger">Not Implemented</mark></p>
+        <br />
+    </div>
+
+    <div id="actionsdiv">
+        <h4>Actions</h4>
+        <hr />
+        @if (Model.ConfirmedDate != null)
+        {
+            <a class="btn btn-primary" asp-action="" asp-route-id="@Model.OrderId">Re-Order</a>
+        }
+        else if (Model.CompletedDate != null)
+        {
+            <a class="btn btn-primary" asp-action="ConfirmOrder" asp-route-id="@Model.OrderId">Confirm Completion</a> <a class="btn btn-primary" asp-action="" asp-route-id="@Model.OrderId">Re-Order</a>
+        }
+        else
+        {
+            <a class="btn btn-primary" asp-action="CompleteOrder" asp-route-id="@Model.OrderId">Complete</a> <a class="btn btn-primary" asp-action="" asp-route-id="@Model.OrderId">Re-Order</a>
+        }
+    </div>
 </div>
+
 <p><br /></p>
 <div>
     <a asp-action="Index">Back to  List</a>
 </div>
+
+<script>
+
+    var detailsbtn = document.getElementById("detailsbtn");
+    var detailsdiv = document.getElementById("detailsdiv");
+    var detailscount = 0;
+    var usersbtn = document.getElementById("usersbtn");
+    var usersdiv = document.getElementById("usersdiv");
+    var userscount = 0;
+    var filesbtn = document.getElementById("filesbtn");
+    var filesdiv = document.getElementById("filesdiv");
+    var filescount = 0;
+    var actionsbtn = document.getElementById("actionsbtn");
+    var actionsdiv = document.getElementById("actionsdiv");
+    var actionscount = 0;
+
+    detailsdiv.hidden = true;
+    usersdiv.hidden = true;
+    filesdiv.hidden = true;
+    actionsdiv.hidden = true;
+
+    detailsbtn.addEventListener("click", function () {
+        if (detailscount === 0) {
+            detailsdiv.hidden = false;
+            detailsbtn.classList.remove('btn-primary');
+            detailsbtn.classList.add('btn-secondary');
+            detailscount = 1;
+        } else if (detailscount === 1) {
+            detailsdiv.hidden = true;
+            detailsbtn.classList.remove('btn-secondary');
+            detailsbtn.classList.add('btn-primary');
+            detailscount = 0;
+        }
+    })
+
+    usersbtn.addEventListener("click", function () {
+        if (userscount === 0) {
+            usersdiv.hidden = false;
+            usersbtn.classList.remove('btn-primary');
+            usersbtn.classList.add('btn-secondary');
+            userscount = 1;
+        } else if (userscount === 1) {
+            usersdiv.hidden = true;
+            usersbtn.classList.remove('btn-secondary');
+            usersbtn.classList.add('btn-primary');
+            userscount = 0;
+        }
+    })
+
+    filesbtn.addEventListener("click", function () {
+        if (filescount === 0) {
+            filesdiv.hidden = false;
+            filesbtn.classList.remove('btn-primary');
+            filesbtn.classList.add('btn-secondary');
+            filescount = 1;
+        } else if (filescount === 1) {
+            filesdiv.hidden = true;
+            filesbtn.classList.remove('btn-secondary');
+            filesbtn.classList.add('btn-primary');
+            filescount = 0;
+        }
+    })
+
+    actionsbtn.addEventListener("click", function () {
+        if (actionscount === 0) {
+            actionsdiv.hidden = false;
+            actionsbtn.classList.remove('btn-primary');
+            actionsbtn.classList.add('btn-secondary');
+            actionscount = 1;
+        } else if (actionscount === 1) {
+            actionsdiv.hidden = true;
+            actionsbtn.classList.remove('btn-secondary');
+            actionsbtn.classList.add('btn-primary');
+            actionscount = 0;
+        }
+    })
+
+    var addrbtn = document.getElementById("OpenAddrForm");
+    var addrform = document.getElementById("addrform");
+    var addrcount = 0;
+
+    addrform.hidden = true;
+
+    addrbtn.addEventListener("click", function () {
+        if (addrcount === 0) {
+            addrform.hidden = false;
+            addrcount = 1;
+        } else if (addrcount === 1) {
+            addrform.hidden = true;
+            addrcount = 0;
+        }
+    })
+
+    var persbtn = document.getElementById("OpenPersForm");
+    var persform = document.getElementById("persform");
+    var perscount = 0;
+
+    persform.hidden = true;
+
+    persbtn.addEventListener("click", function () {
+        if (perscount === 0) {
+            persform.hidden = false;
+            perscount = 1;
+        } else if (perscount === 1) {
+            persform.hidden = true;
+            perscount = 0;
+        }
+    })
+</script>

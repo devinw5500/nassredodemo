@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TaxSystemNASS.Models
 {
@@ -10,13 +11,14 @@ namespace TaxSystemNASS.Models
         }
 
         public int AddressId { get; set; }
-        public string AddressLine1 { get; set; } = null;
-        public string AddressLine2 { get; set; } = null;
-        public string StateAbbr { get; set; } = null;
-        public string City { get; set; } = null;
-        public string County { get; set; } = null;
-        public string Zip { get; set; } = null;
-        public string ParcelId { get; set; } = null;
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string StateAbbr { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
+        public string Zip { get; set; }
+        public string ParcelId { get; set; }
+        public string AssessedAmount { get; set; }
 
         public virtual ICollection<AddressInOrder> AddressInOrder { get; set; }
     }
