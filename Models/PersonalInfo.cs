@@ -11,14 +11,14 @@ namespace TaxSystemNASS.Models
         }
 
         public int PersonalInfoId { get; set; }
-        public string PersonalInfoGuid { get; set; } = null;
-        public string FirstName { get; set; } = null;
-        public string MiddleInitial { get; set; } = null;
-        public string LastName { get; set; } = null;
-        public DateTime? Dob { get; set; } = null;
-        public string Email { get; set; } = null;
-        public string Phone { get; set; } = null;
-        public string Fax { get; set; } = null;
+        public string PersonalInfoGuid { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
+        public string LastName { get; set; }
+        public DateTime? Dob { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
         public string HashedSsn { get; set; }
 
         public virtual ICollection<PersonInOrder> PersonInOrder { get; set; }

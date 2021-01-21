@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginWith2faModel : PageModel
+    public class LoginWith2FaModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly ILogger<LoginWith2FaModel> _logger;
 
-        public LoginWith2faModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2faModel> logger)
+        public LoginWith2FaModel(SignInManager<IdentityUser> signInManager, ILogger<LoginWith2FaModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -49,7 +47,7 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.{user}");
             }
 
             ReturnUrl = returnUrl;
@@ -70,7 +68,7 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user {user}.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);

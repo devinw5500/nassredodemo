@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account
 {
@@ -24,6 +21,7 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account
 
         public void OnGet()
         {
+            //! why is this here
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)

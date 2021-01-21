@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TaxSystemNASS.Models
 {
@@ -41,6 +43,10 @@ namespace TaxSystemNASS.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.AddressLine2).HasMaxLength(50);
+
+                entity.Property(e => e.AssessedAmount)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -199,12 +205,13 @@ namespace TaxSystemNASS.Models
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.OrderEta)
-                    .HasColumnName("OrderETA")
-                    .HasColumnType("date");
+                entity.Property(e => e.CompletedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ConfirmedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderEta).HasColumnName("OrderETA");
 
                 entity.Property(e => e.OrderGuid)
-                    .IsRequired()
                     .HasColumnName("OrderGUID")
                     .HasMaxLength(100);
 
@@ -230,7 +237,11 @@ namespace TaxSystemNASS.Models
                     .HasMaxLength(256)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.UserSubmitted).HasMaxLength(450);
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderComment)
@@ -358,12 +369,6 @@ namespace TaxSystemNASS.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.Aspnetuser)
-                    .WithMany(p => p.UserForOrder)
-                    .HasForeignKey(d => d.AspnetuserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserForOrder_UserForOrder");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.UserForOrder)

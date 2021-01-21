@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
 {
-    public class Disable2faModel : PageModel
+    public class Disable2FaModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<Disable2faModel> _logger;
+        private readonly ILogger<Disable2FaModel> _logger;
 
-        public Disable2faModel(
+        public Disable2FaModel(
             UserManager<IdentityUser> userManager,
-            ILogger<Disable2faModel> logger)
+            ILogger<Disable2FaModel> logger)
         {
             _userManager = userManager;
             _logger = logger;

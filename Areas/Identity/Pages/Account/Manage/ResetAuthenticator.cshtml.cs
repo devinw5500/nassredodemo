@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        private readonly ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
             UserManager<IdentityUser> userManager,
@@ -33,6 +30,8 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogWarning($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
@@ -50,7 +49,7 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
             await _userManager.SetTwoFactorEnabledAsync(user, false);
             await _userManager.ResetAuthenticatorKeyAsync(user);
             _logger.LogInformation("User with ID '{UserId}' has reset their authentication app key.", user.Id);
-            
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your authenticator app key has been reset, you will need to configure your authenticator app using the new key.";
 

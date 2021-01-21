@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Inbox";
+}
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Home</a>
+</div>
+
+<h3>All Comments</h3>
+<hr />
+
+<div id="commentstable" style="overflow-y: auto; height: 500px;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Comment</th>
+                <th style="padding-left:1em;">Urgent</th>
+                <th style="padding-left:1em;">Date</th>
+                <th style="padding-left:1em;">User</th>
+                <th style="padding-left:5em;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (OrderComment comment in ViewBag.Comments)
+            {
+                @if (comment.Comment.Contains("@" + User.Identity.Name))
+                {
+                    @if (comment.Urgent == true)
+                    {
+                        <tr style="background-color:#ecdfec">
+                            <td>@comment.Comment</td>
+                            <td style="padding-left:1em; color:darkred"><span>&#10003;</span></td>
+
+                            <td style="padding-left:1em;">@comment.Date</td>
+                            <td style="padding-left:1em;">@comment.UserSubmitted</td>
+                            <td style="padding-left:5em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@comment.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (comment.Urgent == false)
+                    {
+                        <tr style="background-color:#ecdfec">
+                            <td>@comment.Comment</td>
+                            <td style="padding-left:1em;"> </td>
+                            <td style="padding-left:1em;">@comment.Date</td>
+                            <td style="padding-left:1em;">@comment.UserSubmitted</td>
+                            <td style="padding-left:5em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@comment.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @if (comment.Urgent == true)
+                    {
+                        <tr>
+                            <td>@comment.Comment</td>
+                            <td style="padding-left:1em; color:darkred"><span>&#10003;</span></td>
+
+                            <td style="padding-left:1em;">@comment.Date</td>
+                            <td style="padding-left:1em;">@comment.UserSubmitted</td>
+                            <td style="padding-left:5em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@comment.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                    @if (comment.Urgent == false)
+                    {
+                        <tr>
+                            <td>@comment.Comment</td>
+                            <td style="padding-left:1em;">X</td>
+                            <td style="padding-left:1em;">@comment.Date</td>
+                            <td style="padding-left:1em;">@comment.UserSubmitted</td>
+                            <td style="padding-left:5em;">
+                                <a asp-controller="OrderDetails" asp-action="OrderDetails" asp-route-id="@comment.OrderId">View Order</a>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

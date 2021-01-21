@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
 {
@@ -24,6 +24,7 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogWarning($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 

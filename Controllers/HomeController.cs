@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using TaxSystemNASS.Models;
 
+using System;
+
 namespace TaxSystemNASS.Controllers
 {
     //TODO: Queue type thing for employees
@@ -60,29 +62,32 @@ namespace TaxSystemNASS.Controllers
 
         public IActionResult ClientHome()
         {
-            double total = (WIPNumber()) + (NotStartedNumber()) + (ActionNeededNumber());
-            double wip = ((WIPNumber()) / total) * 100;
-            double ns = ((NotStartedNumber()) / total) * 100;
-            double an = ((ActionNeededNumber()) / total) * 100;
-
             ViewBag.Orders = sqlCall();
-            ViewBag.WIPNum = wip;
-            ViewBag.NSNum = ns;
-            ViewBag.ANNum = an;
+            ViewBag.WIPNum = WIPNumber();
+            ViewBag.NSNum = NotStartedNumber();
+            ViewBag.ANNum = ActionNeededNumber();
+            ViewBag.LONum = LateNumber();
+            ViewBag.RCNum = RecCompleteNumber();
+            ViewBag.NCNum = NeedConfirm();
+
             return View();
         }
 
         public IActionResult EmployeeHome()
         {
-            double total = (WIPNumber()) + (NotStartedNumber()) + (ActionNeededNumber());
-            double wip = ((WIPNumber()) / total) * 100;
-            double ns = ((NotStartedNumber()) / total) * 100;
-            double an = ((ActionNeededNumber()) / total) * 100;
-
             ViewBag.Orders = sqlCall();
-            ViewBag.WIPNum = wip;
-            ViewBag.NSNum = ns;
-            ViewBag.ANNum = an;
+            ViewBag.WIPNum = WIPNumber();
+            ViewBag.NSNum = NotStartedNumber();
+            ViewBag.ANNum = ActionNeededNumber();
+            ViewBag.LONum = LateNumber();
+
+            return View();
+        }
+
+        public IActionResult Inbox()
+        {
+            var comments = _context.OrderComment.FromSqlRaw($@"SELECT [OrderComment].* FROM [dbo].[OrderComment] ORDER BY [OrderCommentID] DESC").ToList();
+            ViewBag.Comments = comments;
             return View();
         }
 
@@ -110,6 +115,31 @@ namespace TaxSystemNASS.Controllers
         public int ActionNeededNumber()
         {
             var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'ACTION NEEDED'").ToList();
+            int size = orders.Count();
+            return size;
+        }
+
+        public int LateNumber()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] LIKE 'Late%'").ToList();
+            int size = orders.Count();
+            return size;
+        }
+
+        public int RecCompleteNumber()
+        {
+            DateTime since = DateTime.Today.AddDays(-10);
+            string s = since.ToShortDateString();
+            Debug.WriteLine("date: " + s);
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'Completed' AND [Order].[ConfirmedDate] > '{s}'").ToList();
+
+            int size = orders.Count();
+            return size;
+        }
+
+        public int NeedConfirm()
+        {
+            var orders = _context.Order.FromSqlRaw(@$"SELECT [Order].* FROM [dbo].[UserForOrder] INNER JOIN [Order] ON [Order].[OrderID] = [UserForOrder].[OrderID] WHERE [UserForOrder].[ASPNETUserID] = '{User.Identity.Name}' AND [Order].[Status] = 'Needs Confirmation'").ToList();
             int size = orders.Count();
             return size;
         }
