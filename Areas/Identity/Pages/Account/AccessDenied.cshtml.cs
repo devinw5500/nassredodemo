@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TaxSystemNASS.Areas.Identity.Pages.Account
 {
@@ -6,7 +10,8 @@ namespace TaxSystemNASS.Areas.Identity.Pages.Account
     {
         public void OnGet()
         {
-            //! why is this here
+
         }
     }
 }
+

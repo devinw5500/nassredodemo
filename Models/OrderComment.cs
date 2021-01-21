@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TaxSystemNASS.Models
+﻿namespace TaxSystemNASS.Models
 {
     public partial class OrderComment
     {
@@ -9,8 +6,6 @@ namespace TaxSystemNASS.Models
         public int OrderId { get; set; }
         public string Comment { get; set; }
         public bool? Urgent { get; set; }
-        public DateTime? Date { get; set; }
-        public string UserSubmitted { get; set; }
 
         public virtual Order Order { get; set; }
     }

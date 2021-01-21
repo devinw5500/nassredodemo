@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TaxSystemNASS.Models
+﻿namespace TaxSystemNASS.Models
 {
     public partial class AspNetUserClaims
     {
